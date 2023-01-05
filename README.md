@@ -3,5 +3,5 @@ The MonoGame SpriteEngine is a framework that aims to create 2D game quickly and
 Screenshots:  
 
 
-![alt tag](https://imgur.com/OnWWPCa.jpg"")
+![alt tag](https://imgur.com/OnWWPCal.jpg"")
 
