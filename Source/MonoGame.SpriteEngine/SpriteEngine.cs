@@ -522,7 +522,7 @@ public class Sprite
     }
 
     public string Name;
-       
+
     public string ImageName
     {
         get => imageName;
@@ -717,7 +717,7 @@ public class SpriteEx : Sprite
     private int groupNumber;
     private Sprite AttachTo;
     public float Angle;
-    
+
     private float SrcAngle, DestAngle;
     private List<float> PositionListX, PositionListY;
     public Microsoft.Xna.Framework.Rectangle CropRect;
@@ -728,7 +728,7 @@ public class SpriteEx : Sprite
     public override void DoMove(float Delta)
     {
         base.DoMove(Delta);
-        
+
     }
     public int GetAngle256(int X, int Y)
     {
@@ -766,7 +766,7 @@ public class SpriteEx : Sprite
         else
             return (B - A) <= Epsilon;
     }
-    public void TowardToPos(int TargetX, int TargetY, float Speed, bool DoLookAt, bool Stop,float Delta)
+    public void TowardToPos(int TargetX, int TargetY, float Speed, bool DoLookAt, bool Stop, float Delta)
     {
         if (DoLookAt)
             LookAt(TargetX, TargetY);
@@ -787,7 +787,7 @@ public class SpriteEx : Sprite
         }
         else
         {
-            X += (float)(Sin256(Direction256) * Speed* Delta);
+            X += (float)(Sin256(Direction256) * Speed * Delta);
             Y -= (float)(Cos256(Direction256) * Speed * Delta);
         }
     }
@@ -809,13 +809,13 @@ public class SpriteEx : Sprite
         if (SrcAngle < 0)
             SrcAngle = 255 + SrcAngle;
         Angle = SrcAngle / PIConv256;
-        X += (float)(Sin256((int)SrcAngle) * MoveSpeed );
+        X += (float)(Sin256((int)SrcAngle) * MoveSpeed);
         Y -= (float)(Cos256((int)SrcAngle) * MoveSpeed);
     }
 
     // toward(rotate self angle automation)(straight) move  direction
     // and move by rotation speed(to destination position)
-    public void RotateToPos(int TargetX, int TargetY, float RotateSpeed, float MoveSpeed,float Delta)
+    public void RotateToPos(int TargetX, int TargetY, float RotateSpeed, float MoveSpeed, float Delta)
     {
         DestAngle = GetAngle256((int)X, (int)Y, TargetX, TargetY);
         if (!SameValue(SrcAngle, DestAngle, RotateSpeed + 1))
@@ -1476,6 +1476,116 @@ public class JumperSprite : PlayerSprite
                     VelocityY = MaxFallSpeed;
                 break;
         }
+    }
+}
+
+public class JumperSpriteEx : PlayerSprite
+{
+    public JumperSpriteEx(Sprite Parent) : base(Parent)
+    {
+        Acceleration = 0.2f;
+        Decceleration = 0.2f;
+    }
+    private JumpState jumpState = JumpState.jsNone;
+    public int JumpCount;
+    public float JumpSpeed = 0.25f;
+    public float JumpStartSpeed;
+    public float JumpHeight = 8;
+    public float LowJumpSpeed = 0.185f;
+    public float LowJumpGravity = 0.6f;
+    public int HighJumpValue = 1000;
+    public float HighJumpSpeed = 0.1f;
+    public float FallingSpeed = 0.2f;
+    public float MaxFallSpeed = 5;
+    public bool DoJump;
+    public bool HoldKey;
+    public float Offset = 1;
+
+    public override void Accelerate()
+    {
+        if (Speed != MaxSpeed)
+        {
+            Speed += Acc;
+            if (Speed > MaxSpeed)
+                Speed = MaxSpeed;
+            // VelocityX := Cos256(FDirection) * Speed;
+        }
+    }
+    public override void Deccelerate()
+    {
+        if (Speed != MinSpeed)
+        {
+            Speed -= Dcc;
+            if (Speed < MinSpeed)
+                Speed = MinSpeed;
+        }
+    }
+
+    public JumpState JumpState
+    {
+        get => jumpState;
+        set
+        {
+            if (jumpState != value)
+            {
+                jumpState = value;
+                switch (value)
+                {
+                    case JumpState.jsNone:
+                    case JumpState.jsFalling:
+                        VelocityY = 0;
+                        break;
+                }
+            }
+        }
+    }
+
+    public override void DoMove(float Delta)
+    {
+        base.DoMove(Delta);
+        switch (jumpState)
+        {
+            case JumpState.jsNone:
+
+                if (DoJump)
+                {
+                    HoldKey = true;
+                    JumpSpeed = JumpStartSpeed;
+                    JumpState = JumpState.jsJumping;
+                    VelocityY = -JumpHeight;
+                }
+                break;
+            case JumpState.jsJumping:
+                if (HoldKey)
+                {
+                    JumpCount++;
+                }
+
+                if (HoldKey == false)
+                {
+                    JumpSpeed = LowJumpSpeed; // 0.185;
+                    Offset = VelocityY;
+                    VelocityY = Offset * LowJumpGravity; // 0.6;  //range 0.0-->1.0
+                    HoldKey = true;
+                    JumpCount = 0;
+                }
+                if (JumpCount > HighJumpValue)
+                    JumpSpeed = HighJumpSpeed;
+                Y += VelocityY * Delta;
+                VelocityY += JumpSpeed * Delta;
+                if (VelocityY > 0)
+                    JumpState = JumpState.jsFalling;
+                break;
+            case JumpState.jsFalling:
+                JumpCount = 0;
+                JumpSpeed = FallingSpeed;
+                Y += VelocityY * Delta;
+                VelocityY += JumpSpeed * Delta;
+                if (VelocityY > MaxFallSpeed)
+                    VelocityY = MaxFallSpeed;
+                break;
+        }
+        DoJump = false;
     }
 }
 
