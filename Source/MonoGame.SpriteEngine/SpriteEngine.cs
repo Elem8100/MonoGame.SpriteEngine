@@ -46,6 +46,16 @@ public enum TileMode
     Full
 }
 
+public struct FrameData
+{
+    public string AnimName, ImageName;
+    public int OriginX, OriginY;
+    public Rectangle CropArea;
+    public int Delay;
+
+}
+
+
 public class MonoSpriteEngine : Sprite
 {
     public MonoSpriteEngine(Sprite Parent) : base(Parent)
@@ -1111,6 +1121,7 @@ public class AnimatedSprite : SpriteEx
         this.Height = Height;
     }
 
+
     public bool DoAnimate;
     public float AnimPos;
     private int animStart;
@@ -1133,6 +1144,49 @@ public class AnimatedSprite : SpriteEx
     public AnimPlayMode AnimPlayMode;
     public int ImageIndex;
     private bool Flag1, Flag2;
+
+    private static Dictionary<string, string> EnumAnimNames = new();
+    private static List<FrameData> FrameList = new();
+    public static Dictionary<string, List<FrameData>> AnimationLib = new();
+    private static void AddAnimation(string Name)
+    {
+        List<FrameData> List = new();
+        foreach (var i in FrameList)
+        {
+            if (i.AnimName == Name)
+            {
+                List.Add(i);
+            }
+        }
+        AnimationLib.Add(Name, List);
+    }
+
+    public static void AddFrame(string AnimName, string ImageName, int OriginX, int OriginY, Rectangle CropArea, int Delay)
+    {
+        var Frame = new FrameData();
+        Frame.AnimName = AnimName;
+        Frame.ImageName= ImageName;
+        Frame.OriginX = OriginX;
+        Frame.OriginX = OriginY;
+        Frame.CropArea = CropArea;
+        Frame.Delay = Delay;
+        FrameList.Add(Frame);
+        EnumAnimNames.AddOrReplace(AnimName, AnimName);
+    }
+
+    public static void SetSpriteSheet()
+    {
+        foreach (var i in EnumAnimNames)
+        {
+            AddAnimation(i.Key);
+        }
+    }
+    public static void ResetSpriteSheet()
+    {
+        EnumAnimNames.Clear();
+        AnimationLib.Clear();
+        FrameList.Clear();  
+    }
 
     public bool AnimEnded()
     {
