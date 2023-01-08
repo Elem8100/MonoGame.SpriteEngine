@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpDX.XAudio2;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
@@ -50,7 +51,7 @@ public struct FrameData
 {
     public string AnimName, ImageName;
     public int OriginX, OriginY;
-    public Rectangle CropArea;
+    public Microsoft.Xna.Framework.Rectangle CropArea;
     public int Delay;
 
 }
@@ -1000,6 +1001,7 @@ public class SpriteEx : Sprite
     }
     public override void DoDraw()
     {
+        if(!ImageLib.ContainsKey(ImageName)) return;
         switch (ImageMode)
         {
             case ImageMode.SpriteSingle:
@@ -1144,6 +1146,8 @@ public class AnimatedSprite : SpriteEx
     public AnimPlayMode AnimPlayMode;
     public int ImageIndex;
     private bool Flag1, Flag2;
+    public bool FixedAnimSpeed;
+    public string AnimName;
 
     private static Dictionary<string, string> EnumAnimNames = new();
     private static List<FrameData> FrameList = new();
@@ -1161,31 +1165,31 @@ public class AnimatedSprite : SpriteEx
         AnimationLib.Add(Name, List);
     }
 
-    public static void AddFrame(string AnimName, string ImageName, int OriginX, int OriginY, Rectangle CropArea, int Delay)
+    public static void AddFrame(string AnimName, string ImageName, int OriginX, int OriginY, Microsoft.Xna.Framework.Rectangle CropArea, int Delay)
     {
         var Frame = new FrameData();
         Frame.AnimName = AnimName;
-        Frame.ImageName= ImageName;
+        Frame.ImageName = ImageName;
         Frame.OriginX = OriginX;
-        Frame.OriginX = OriginY;
+        Frame.OriginY = OriginY;
         Frame.CropArea = CropArea;
         Frame.Delay = Delay;
         FrameList.Add(Frame);
         EnumAnimNames.AddOrReplace(AnimName, AnimName);
     }
 
-    public static void SetSpriteSheet()
+    public static void FinishFrames()
     {
         foreach (var i in EnumAnimNames)
         {
             AddAnimation(i.Key);
         }
     }
-    public static void ResetSpriteSheet()
+    public static void ResetFrames()
     {
         EnumAnimNames.Clear();
         AnimationLib.Clear();
-        FrameList.Clear();  
+        FrameList.Clear();
     }
 
     public bool AnimEnded()
@@ -1300,7 +1304,7 @@ public class AnimatedSprite : SpriteEx
     public void SetAnim(string AniImageName, int AniStart, int AniCount, float AniSpeed, bool AniLooped, AnimPlayMode PlayMode = AnimPlayMode.Forward)
     {
         ImageName = AniImageName;
-        AnimStart = AniStart;
+        animStart = AniStart;
         AnimCount = AniCount;
         AnimSpeed = AniSpeed;
         AnimLooped = AniLooped;
@@ -1310,6 +1314,35 @@ public class AnimatedSprite : SpriteEx
             //PatternIndex = animStart % AnimCount;
             AnimPos = animStart;
         }
+    }
+
+    public void PlayAnimation(string AniName, float AniSpeed, bool AniLooped, bool Flip, bool DoAnim, AnimPlayMode PlayMode = AnimPlayMode.Forward)
+    {
+        AnimName = AniName;
+        animStart = 0;
+        AnimSpeed = AniSpeed;
+        AnimLooped = AniLooped;
+        FlipX = Flip;
+        DoAnimate = DoAnim;
+        AnimPlayMode = PlayMode;
+        if ((ImageIndex < animStart) || (ImageIndex >= AnimCount + AnimStart))
+        {
+            //PatternIndex = animStart % AnimCount;
+            AnimPos = animStart;
+            ImageIndex = (int)AnimPos;
+        }
+        
+        AnimCount = AnimationLib[AnimName].Count;
+        if (ImageIndex >= AnimCount)
+            ImageIndex = 0;
+        ImageName = AnimationLib[AnimName][ImageIndex].ImageName;
+        OriginX = AnimationLib[AnimName][ImageIndex].OriginX;
+        OriginY = AnimationLib[AnimName][ImageIndex].OriginY;
+        if(FlipX)
+        {
+           OriginX = (AnimationLib[AnimName][ImageIndex].OriginX*-1)+ AnimationLib[AnimName][ImageIndex].CropArea.Width;
+        }
+        CropRect = AnimationLib[AnimName][ImageIndex].CropArea;
     }
 
 }
