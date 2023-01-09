@@ -1342,6 +1342,11 @@ public class AnimatedSprite : SpriteEx
         {
            OriginX = (AnimationLib[AnimName][ImageIndex].OriginX*-1)+ AnimationLib[AnimName][ImageIndex].CropArea.Width;
         }
+        if (FlipY)
+        {
+            OriginY = (AnimationLib[AnimName][ImageIndex].OriginY * -1) + AnimationLib[AnimName][ImageIndex].CropArea.Height;
+        }
+
         CropRect = AnimationLib[AnimName][ImageIndex].CropArea;
     }
 
