@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sym type="spr">
+    <frame>
+        <stand1_00 x="348" y="340" sx="58" sy="68" cx="27" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="68" />
+            </area>
+        </stand1_00>
+        <stand1_01 x="798" y="345" sx="57" sy="69" cx="26" cy="69" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="69" />
+            </area>
+        </stand1_01>
+        <stand1_02 x="912" y="345" sx="57" sy="69" cx="25" cy="69" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="69" />
+            </area>
+        </stand1_02>
+        <stand1_03 x="285" y="408" sx="57" sy="68" cx="26" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="68" />
+            </area>
+        </stand1_03>
+        <stand1_04 x="627" y="345" sx="57" sy="69" cx="26" cy="69" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="69" />
+            </area>
+        </stand1_04>
+        <stand1_05 x="684" y="345" sx="57" sy="69" cx="25" cy="69" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="69" />
+            </area>
+        </stand1_05>
+        <hit_00 x="420" y="219" sx="60" sy="73" cx="27" cy="74" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="25" y="16" />
+                <p01 name="c" x="28" y="31" />
+                <p02 name="hit" x="28" y="31" />
+            </point>
+            <area>
+                <area0 type="13" x="6" y="0" sx="54" sy="73" />
+            </area>
+        </hit_00>
+        <hit_01 x="649" y="219" sx="59" sy="73" cx="26" cy="74" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="24" y="16" />
+                <p01 name="c" x="25" y="30" />
+                <p02 name="hit" x="25" y="30" />
+            </point>
+            <area>
+                <area0 type="13" x="5" y="0" sx="54" sy="73" />
+            </area>
+        </hit_01>
+        <stand3_00 x="522" y="340" sx="58" sy="68" cx="27" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </stand3_00>
+        <stand3_01 x="741" y="345" sx="57" sy="69" cx="26" cy="69" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="69" />
+            </area>
+        </stand3_01>
+        <stand3_02 x="855" y="345" sx="57" sy="69" cx="25" cy="69" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="69" />
+            </area>
+        </stand3_02>
+        <stand3_03 x="228" y="408" sx="57" sy="68" cx="26" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="68" />
+            </area>
+        </stand3_03>
+        <stand3_04 x="0" y="414" sx="57" sy="69" cx="26" cy="69" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="69" />
+            </area>
+        </stand3_04>
+        <stand3_05 x="57" y="414" sx="57" sy="69" cx="25" cy="69" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="69" />
+            </area>
+        </stand3_05>
+        <stand2_00 x="345" y="260" sx="69" sy="65" cx="33" cy="65" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="20" y="20" />
+                <p01 name="c" x="27" y="33" />
+                <p02 name="hit" x="27" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="65" />
+            </area>
+        </stand2_00>
+        <stand2_01 x="464" y="340" sx="58" sy="68" cx="28" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="16" y="19" />
+                <p01 name="c" x="22" y="33" />
+                <p02 name="hit" x="22" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </stand2_01>
+        <stand2_02 x="207" y="201" sx="69" sy="67" cx="33" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="21" y="19" />
+                <p01 name="c" x="27" y="33" />
+                <p02 name="hit" x="27" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="67" />
+            </area>
+        </stand2_02>
+        <stand2_03 x="406" y="340" sx="58" sy="68" cx="28" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="16" y="19" />
+                <p01 name="c" x="22" y="33" />
+                <p02 name="hit" x="22" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </stand2_03>
+        <stand2_04 x="308" y="134" sx="77" sy="67" cx="33" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="21" y="19" />
+                <p01 name="c" x="27" y="33" />
+                <p02 name="hit" x="27" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="67" />
+            </area>
+        </stand2_04>
+        <stand2_05 x="0" y="136" sx="79" sy="68" cx="32" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="20" y="19" />
+                <p01 name="c" x="26" y="33" />
+                <p02 name="hit" x="26" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="4" y="0" sx="58" sy="68" />
+            </area>
+        </stand2_05>
+        <stand2_06 x="510" y="0" sx="102" sy="67" cx="44" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="32" y="19" />
+                <p01 name="c" x="38" y="33" />
+                <p02 name="hit" x="38" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="11" y="0" sx="69" sy="67" />
+            </area>
+        </stand2_06>
+        <stand2_07 x="228" y="0" sx="114" sy="68" cx="55" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="43" y="19" />
+                <p01 name="c" x="49" y="33" />
+                <p02 name="hit" x="49" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="27" y="0" sx="58" sy="68" />
+            </area>
+        </stand2_07>
+        <stand2_08 x="830" y="67" sx="83" sy="67" cx="38" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="26" y="19" />
+                <p01 name="c" x="32" y="33" />
+                <p02 name="hit" x="32" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="5" y="0" sx="69" sy="67" />
+            </area>
+        </stand2_08>
+        <stand2_09 x="920" y="0" sx="92" sy="68" cx="44" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="32" y="19" />
+                <p01 name="c" x="38" y="33" />
+                <p02 name="hit" x="38" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="16" y="0" sx="58" sy="68" />
+            </area>
+        </stand2_09>
+        <stand2_10 x="808" y="0" sx="101" sy="67" cx="54" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="42" y="19" />
+                <p01 name="c" x="48" y="33" />
+                <p02 name="hit" x="48" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="21" y="0" sx="69" sy="67" />
+            </area>
+        </stand2_10>
+        <stand2_11 x="581" y="68" sx="83" sy="68" cx="28" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="16" y="19" />
+                <p01 name="c" x="22" y="33" />
+                <p02 name="hit" x="22" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </stand2_11>
+        <stand2_12 x="376" y="67" sx="94" sy="67" cx="33" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="21" y="19" />
+                <p01 name="c" x="27" y="33" />
+                <p02 name="hit" x="27" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="67" />
+            </area>
+        </stand2_12>
+        <stand4_00 x="138" y="260" sx="69" sy="65" cx="33" cy="65" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="21" y="20" />
+                <p01 name="c" x="27" y="33" />
+                <p02 name="hit" x="27" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="65" />
+            </area>
+        </stand4_00>
+        <stand4_01 x="58" y="340" sx="58" sy="68" cx="28" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="16" y="19" />
+                <p01 name="c" x="22" y="33" />
+                <p02 name="hit" x="22" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </stand4_01>
+        <stand4_02 x="276" y="201" sx="69" sy="67" cx="33" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="21" y="19" />
+                <p01 name="c" x="27" y="33" />
+                <p02 name="hit" x="27" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="67" />
+            </area>
+        </stand4_02>
+        <stand4_03 x="928" y="272" sx="58" sy="68" cx="28" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="16" y="19" />
+                <p01 name="c" x="22" y="33" />
+                <p02 name="hit" x="22" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </stand4_03>
+        <stand4_04 x="616" y="0" sx="77" sy="67" cx="33" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="21" y="19" />
+                <p01 name="c" x="27" y="33" />
+                <p02 name="hit" x="27" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="67" />
+            </area>
+        </stand4_04>
+        <stand4_05 x="79" y="136" sx="79" sy="68" cx="32" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="20" y="19" />
+                <p01 name="c" x="26" y="33" />
+                <p02 name="hit" x="27" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="4" y="0" sx="58" sy="68" />
+            </area>
+        </stand4_05>
+        <stand4_06 x="408" y="0" sx="102" sy="67" cx="44" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="32" y="19" />
+                <p01 name="c" x="38" y="33" />
+                <p02 name="hit" x="38" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="11" y="0" sx="69" sy="67" />
+            </area>
+        </stand4_06>
+        <stand4_07 x="0" y="0" sx="115" sy="68" cx="56" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="44" y="19" />
+                <p01 name="c" x="50" y="33" />
+                <p02 name="hit" x="50" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="28" y="0" sx="58" sy="68" />
+            </area>
+        </stand4_07>
+        <stand4_08 x="747" y="67" sx="83" sy="67" cx="38" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="26" y="19" />
+                <p01 name="c" x="32" y="33" />
+                <p02 name="hit" x="32" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="5" y="0" sx="69" sy="67" />
+            </area>
+        </stand4_08>
+        <stand4_09 x="0" y="68" sx="92" sy="68" cx="44" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="32" y="19" />
+                <p01 name="c" x="38" y="33" />
+                <p02 name="hit" x="38" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="16" y="0" sx="58" sy="68" />
+            </area>
+        </stand4_09>
+        <stand4_10 x="707" y="0" sx="101" sy="67" cx="54" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="42" y="19" />
+                <p01 name="c" x="48" y="33" />
+                <p02 name="hit" x="48" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="21" y="0" sx="69" sy="67" />
+            </area>
+        </stand4_10>
+        <stand4_11 x="664" y="68" sx="83" sy="68" cx="28" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="16" y="19" />
+                <p01 name="c" x="22" y="33" />
+                <p02 name="hit" x="22" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </stand4_11>
+        <stand4_12 x="470" y="67" sx="94" sy="67" cx="33" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="21" y="19" />
+                <p01 name="c" x="27" y="33" />
+                <p02 name="hit" x="27" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="67" />
+            </area>
+        </stand4_12>
+        <walk1_00 x="0" y="340" sx="58" sy="68" cx="27" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </walk1_00>
+        <walk1_01 x="342" y="469" sx="57" sy="67" cx="27" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="15" y="19" />
+                <p01 name="c" x="22" y="33" />
+                <p02 name="hit" x="22" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="67" />
+            </area>
+        </walk1_01>
+        <walk1_02 x="232" y="340" sx="58" sy="68" cx="27" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </walk1_02>
+        <walk1_03 x="118" y="335" sx="59" sy="67" cx="27" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="13" y="19" />
+                <p01 name="c" x="20" y="33" />
+                <p02 name="hit" x="20" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="59" sy="67" />
+            </area>
+        </walk1_03>
+        <walk2_00 x="290" y="340" sx="58" sy="68" cx="27" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </walk2_00>
+        <walk2_01 x="342" y="0" sx="57" sy="67" cx="27" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="15" y="19" />
+                <p01 name="c" x="22" y="33" />
+                <p02 name="hit" x="22" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="57" sy="67" />
+            </area>
+        </walk2_01>
+        <walk2_02 x="870" y="272" sx="58" sy="68" cx="27" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="58" sy="68" />
+            </area>
+        </walk2_02>
+        <walk2_03 x="236" y="268" sx="59" sy="67" cx="27" cy="67" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="13" y="19" />
+                <p01 name="c" x="20" y="33" />
+                <p02 name="hit" x="20" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="59" sy="67" />
+            </area>
+        </walk2_03>
+        <run1_00 x="924" y="204" sx="66" sy="68" cx="32" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="19" y="19" />
+                <p01 name="c" x="26" y="33" />
+                <p02 name="hit" x="26" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="66" sy="68" />
+            </area>
+        </run1_00>
+        <run1_01 x="483" y="144" sx="69" sy="72" cx="33" cy="72" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="21" y="19" />
+                <p01 name="c" x="28" y="33" />
+                <p02 name="hit" x="28" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="72" />
+            </area>
+        </run1_01>
+        <run1_02 x="67" y="204" sx="67" sy="68" cx="32" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="19" y="19" />
+                <p01 name="c" x="26" y="33" />
+                <p02 name="hit" x="26" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="67" sy="68" />
+            </area>
+        </run1_02>
+        <run1_03 x="845" y="144" sx="65" sy="72" cx="31" cy="72" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="17" y="19" />
+                <p01 name="c" x="24" y="33" />
+                <p02 name="hit" x="24" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="65" sy="72" />
+            </area>
+        </run1_03>
+        <run2_00 x="0" y="272" sx="66" sy="68" cx="32" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="19" y="19" />
+                <p01 name="c" x="26" y="33" />
+                <p02 name="hit" x="26" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="66" sy="68" />
+            </area>
+        </run2_00>
+        <run2_01 x="414" y="144" sx="69" sy="72" cx="33" cy="72" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="21" y="19" />
+                <p01 name="c" x="28" y="33" />
+                <p02 name="hit" x="28" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="72" />
+            </area>
+        </run2_01>
+        <run2_02 x="0" y="204" sx="67" sy="68" cx="32" cy="68" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="19" y="19" />
+                <p01 name="c" x="26" y="33" />
+                <p02 name="hit" x="26" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="67" sy="68" />
+            </area>
+        </run2_02>
+        <run2_03 x="780" y="144" sx="65" sy="72" cx="31" cy="72" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="17" y="19" />
+                <p01 name="c" x="24" y="33" />
+                <p02 name="hit" x="24" y="33" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="65" sy="72" />
+            </area>
+        </run2_03>
+        <die_00 x="150" y="0" sx="75" sy="73" cx="21" cy="83" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="59" y="20" />
+                <p01 name="c" x="54" y="32" />
+            </point>
+        </die_00>
+        <die_01 x="170" y="73" sx="85" sy="73" cx="23" cy="86" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="69" y="21" />
+                <p01 name="c" x="64" y="32" />
+            </point>
+        </die_01>
+        <die_02 x="531" y="219" sx="59" sy="73" cx="-8" cy="88" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="42" y="22" />
+                <p01 name="c" x="38" y="32" />
+            </point>
+        </die_02>
+        <die_03 x="590" y="219" sx="59" sy="73" cx="-12" cy="90" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="42" y="22" />
+                <p01 name="c" x="38" y="32" />
+            </point>
+        </die_03>
+        <readyspell_00 x="732" y="264" sx="61" sy="66" cx="27" cy="66" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="19" />
+                <p01 name="c" x="21" y="33" />
+                <p02 name="hit" x="21" y="33" />
+                <p03 name="effect" x="7" y="31" />
+                <p04 name="fire" x="12" y="28" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="61" sy="66" />
+            </area>
+        </readyspell_00>
+        <readyspell_01 x="793" y="260" sx="61" sy="65" cx="27" cy="65" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="15" y="19" />
+                <p01 name="c" x="21" y="32" />
+                <p02 name="hit" x="21" y="32" />
+                <p03 name="fire" x="12" y="27" />
+                <p04 name="effect" x="7" y="30" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="61" sy="65" />
+            </area>
+        </readyspell_01>
+        <spellcast_00 x="122" y="448" sx="61" sy="64" cx="26" cy="64" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="14" y="20" />
+                <p01 name="c" x="21" y="34" />
+                <p02 name="hit" x="21" y="34" />
+                <p03 name="body" x="6" y="29" />
+                <p04 name="fire" x="12" y="29" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="61" sy="64" />
+            </area>
+        </spellcast_00>
+        <spellcast_01 x="680" y="140" sx="68" sy="70" cx="36" cy="70" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="20" y="20" />
+                <p01 name="c" x="26" y="33" />
+                <p02 name="hit" x="26" y="33" />
+                <p03 name="body" x="16" y="35" />
+                <p04 name="fire" x="16" y="29" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="68" sy="70" />
+            </area>
+        </spellcast_01>
+        <spellcast_02 x="952" y="70" sx="68" sy="70" cx="36" cy="70" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="20" y="19" />
+                <p01 name="c" x="26" y="33" />
+                <p02 name="hit" x="26" y="33" />
+                <p03 name="body" x="16" y="35" />
+                <p04 name="fire" x="16" y="29" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="68" sy="70" />
+            </area>
+        </spellcast_02>
+        <spellcast_03 x="552" y="138" sx="69" sy="69" cx="34" cy="69" name=".\data\raw\png\npc\06058_0.dds">
+            <point>
+                <p00 name="brow" x="21" y="20" />
+                <p01 name="c" x="26" y="32" />
+                <p02 name="hit" x="26" y="32" />
+                <p03 name="body" x="14" y="34" />
+                <p04 name="fire" x="17" y="27" />
+            </point>
+            <area>
+                <area0 type="13" x="0" y="0" sx="69" sy="69" />
+            </area>
+        </spellcast_03>
+    </frame>
+    <animation />
+</sym>
