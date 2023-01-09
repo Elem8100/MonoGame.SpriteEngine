@@ -11,8 +11,8 @@ Screenshots:
 ![alt tag](https://imgur.com/OZfKZ1ul.jpg"")
 
 Compile:
-Vs 2022 or higher
-Credits and Acknowledgement:
+Vs 2022 or higher  
+Credits and Acknowledgement:  
 Kagamia's WzComparerR2(for font DrawSttring) 
 
 
