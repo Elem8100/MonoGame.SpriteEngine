@@ -10,9 +10,10 @@ Screenshots:
 ![alt tag](https://imgur.com/2kemt4yl.jpg"")
 ![alt tag](https://imgur.com/OZfKZ1ul.jpg"")
 
-Compile:
+Compile:  
 Vs 2022 or higher  
+
 Credits and Acknowledgement:  
-Kagamia's WzComparerR2(for font DrawSttring) 
+Kagamia's WzComparerR2(for font DrawString) 
 
 
