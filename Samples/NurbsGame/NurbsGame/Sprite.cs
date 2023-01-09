@@ -21,7 +21,7 @@ public class SpaceBall : NPathSprite
 {
     public SpaceBall(Sprite Parent) : base(Parent)
     {
-        ImageMode = ImageMode.SpriteSingle;
+        SpriteSheetMode = SpriteSheetMode.NoneSingle;
     }
     public int ID;
     public override void DoMove(float Delta)
@@ -188,7 +188,7 @@ public class GameFunc
         for (int i = 0; i < 128; i++)
         {
             var Spark = new Spark(EngineFunc.SpriteEngine);
-            Spark.ImageMode=ImageMode.SpriteSingle;
+            Spark.SpriteSheetMode = SpriteSheetMode.NoneSingle;
             Spark.Init(EngineFunc.ImageLib, "Spark" + Num + ".png", PosX + -Random.Next(0, 31),-20+ PosY + Random.Next(0, 31), 200);
             Spark.BlendMode=MonoGame.SpriteEngine.BlendMode.AddtiveColor;
             Spark.Acceleration = 0.02f;
