@@ -33,11 +33,11 @@ public enum JumpState
 
 }
 
-public enum ImageMode
+public enum SpriteSheetMode
 {
-    SpriteSingle,
-    SpriteSheet,
-    CropRect
+    NoneSingle,
+    FixedSize,
+    VariableSize
 }
 
 public enum TileMode
@@ -732,7 +732,7 @@ public class SpriteEx : Sprite
     private float SrcAngle, DestAngle;
     private List<float> PositionListX, PositionListY;
     public Microsoft.Xna.Framework.Rectangle CropRect;
-    public ImageMode ImageMode;
+    public SpriteSheetMode SpriteSheetMode;
     private const float PIConv256 = -40.743665431f; //-128.0 / PI;
     double[] CosTable256;
 
@@ -1002,9 +1002,9 @@ public class SpriteEx : Sprite
     public override void DoDraw()
     {
         if(!ImageLib.ContainsKey(ImageName)) return;
-        switch (ImageMode)
+        switch (SpriteSheetMode)
         {
-            case ImageMode.SpriteSingle:
+            case SpriteSheetMode.NoneSingle:
                 Engine.Canvas.DrawEx(ImageLib[ImageName],
                                      X + Camera.X + Offset.X - Engine.Camera.X,
                                      Y + Camera.Y + Offset.Y - Engine.Camera.Y,
@@ -1017,7 +1017,7 @@ public class SpriteEx : Sprite
                                      BlendMode);
                 break;
             // 
-            case ImageMode.SpriteSheet:
+            case SpriteSheetMode.FixedSize:
 
                 Engine.Canvas.DrawPattern(ImageLib[ImageName],
                                           X + Camera.X + Offset.X - Engine.Camera.X,
@@ -1035,7 +1035,7 @@ public class SpriteEx : Sprite
 
                 break;
             //
-            case ImageMode.CropRect:
+            case SpriteSheetMode.VariableSize:
                 Engine.Canvas.DrawCropArea(ImageLib[ImageName],
                                            X + Camera.X + Offset.X - Engine.Camera.X,
                                            Y + Camera.Y + Offset.Y - Engine.Camera.Y,
@@ -1102,7 +1102,7 @@ public class AnimatedSprite : SpriteEx
         PatternIndex = 0;
         Width = 64;
         Height = 64;
-        ImageMode = ImageMode.SpriteSheet;
+        SpriteSheetMode = SpriteSheetMode.FixedSize;
     }
 
     public AnimatedSprite(Sprite Parent, Dictionary<string, Microsoft.Xna.Framework.Graphics.Texture2D> ImageLib,
@@ -1113,7 +1113,7 @@ public class AnimatedSprite : SpriteEx
         PatternHeight = 64;
         Width = 64;
         Height = 64;
-        ImageMode = ImageMode.SpriteSheet;
+        SpriteSheetMode = SpriteSheetMode.FixedSize;
         this.ImageLib = ImageLib;
         this.ImageName = ImageName;
         this.X = X;
@@ -1810,7 +1810,7 @@ public class BackgroundSprite : AnimatedSprite
 {
     public BackgroundSprite(Sprite Parent) : base(Parent)
     {
-        ImageMode = ImageMode.SpriteSingle;
+        SpriteSheetMode = SpriteSheetMode.NoneSingle;
         Tiled = true;
         TileMode = TileMode.Vertical;
     }
