@@ -295,7 +295,7 @@ public class GreenApple : JumperSprite
 {
     public GreenApple(Sprite Parent) : base(Parent)
     {
-        ImageMode = ImageMode.SpriteSingle;
+       SpriteSheetMode =  SpriteSheetMode.NoneSingle;
     }
     public override void DoMove(float Delta)
     {
@@ -411,7 +411,7 @@ public class Background : BackgroundSprite
 {
     public Background(Sprite Parent) : base(Parent)
     {
-        ImageMode = ImageMode.SpriteSingle;
+       SpriteSheetMode= SpriteSheetMode.NoneSingle;
         TileMode = TileMode.Horizontal;
     }
 
@@ -442,7 +442,7 @@ public class GameFunc
         {
             var Particle = new ParticleSprite(EngineFunc.SpriteEngine);
             Particle.Init(EngineFunc.ImageLib, "Star.png", PosX + Random.Next(0, 21), PosY + Random.Next(0, 21), 20, 13, 14);
-            Particle.ImageMode = ImageMode.SpriteSingle;
+            Particle.SpriteSheetMode= SpriteSheetMode.NoneSingle;
             Particle.LifeTime = 150;
             Particle.Decay = 1;
             Particle.ScaleX = 1.2f;
@@ -459,7 +459,7 @@ public class GameFunc
     {
         public Spray(Sprite Parent) : base(Parent)
         {
-            ImageMode = ImageMode.SpriteSingle;
+           SpriteSheetMode= SpriteSheetMode.NoneSingle;
         }
         byte Alpha = 255;
         public override void DoMove(float Delta)
