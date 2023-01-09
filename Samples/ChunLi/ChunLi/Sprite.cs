@@ -53,7 +53,7 @@ public class Player : JumperSprite
         WalkSpeed = 2f;
         JumpSpeed = 0.43f;
         JumpHeight = 11;
-        ImageMode = ImageMode.SpriteSheet;
+        SpriteSheetMode = SpriteSheetMode.FixedSize;
         PatternWidth = 180;
         PatternHeight = 150;
         PatternIndex = 0;
