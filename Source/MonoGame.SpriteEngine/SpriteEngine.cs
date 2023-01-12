@@ -718,7 +718,8 @@ public class SpriteEx : Sprite
     public float ScaleY { get; set; }
     public bool FlipX;
     public bool FlipY;
-    public byte Red, Green, Blue, alpha;
+    public byte Red, Green, Blue;
+    private  byte alpha;
     public byte Alpha
     {
         get=>alpha;
