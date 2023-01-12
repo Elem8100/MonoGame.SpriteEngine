@@ -684,7 +684,7 @@ public class SpriteEx : Sprite
         Red = 255;
         Green = 255;
         Blue = 255;
-        Alpha = 255;
+        alpha = 255;
         DrawMode = 1;
         FlipX = false;
         FlipY = false;
@@ -718,7 +718,16 @@ public class SpriteEx : Sprite
     public float ScaleY { get; set; }
     public bool FlipX;
     public bool FlipY;
-    public byte Red, Green, Blue, Alpha;
+    public byte Red, Green, Blue, alpha;
+    public byte Alpha
+    {
+        get=>alpha;
+        set
+        {
+            SetColor(alpha,alpha,alpha,alpha);
+            alpha= value;
+        }   
+    }
 
     public float X1, Y1, X2, Y2;
     public int DrawMode;
@@ -1012,7 +1021,7 @@ public class SpriteEx : Sprite
                                      ScaleX, ScaleY,
                                      Angle,
                                      FlipX, FlipY,
-                                     Red, Green, Blue, Alpha,
+                                     Red, Green, Blue, alpha,
                                      DoCenter,
                                      BlendMode);
                 break;
@@ -1028,7 +1037,7 @@ public class SpriteEx : Sprite
                                           ScaleX, ScaleY,
                                           Angle,
                                           FlipX, FlipY,
-                                          Red, Green, Blue, Alpha,
+                                          Red, Green, Blue, alpha,
                                           DoCenter,
                                           BlendMode);
 
@@ -1044,7 +1053,7 @@ public class SpriteEx : Sprite
                                            ScaleX, ScaleY,
                                            Angle,
                                            FlipX, FlipY,
-                                           Red, Green, Blue, Alpha,
+                                           Red, Green, Blue, alpha,
                                            DoCenter,
                                            BlendMode);
 
@@ -1080,7 +1089,7 @@ public class SpriteEx : Sprite
         this.Red = Red;
         this.Green = Green;
         this.Blue = Blue;
-        this.Alpha = Alpha;
+        this.alpha = Alpha;
     }
 
     public void SetPattern(int Width, int Height)
