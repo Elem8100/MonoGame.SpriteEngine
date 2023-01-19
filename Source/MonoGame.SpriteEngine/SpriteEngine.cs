@@ -719,15 +719,15 @@ public class SpriteEx : Sprite
     public bool FlipX;
     public bool FlipY;
     public byte Red, Green, Blue;
-    private  byte alpha;
+    private byte alpha;
     public byte Alpha
     {
-        get=>alpha;
+        get => alpha;
         set
         {
-            SetColor(alpha,alpha,alpha,alpha);
-            alpha= value;
-        }   
+            SetColor(alpha, alpha, alpha, alpha);
+            alpha = value;
+        }
     }
 
     public float X1, Y1, X2, Y2;
@@ -771,12 +771,12 @@ public class SpriteEx : Sprite
     {
         Angle = GetAngle256((int)X, (int)Y, TargetX, TargetY) / -PIConv256;
     }
-    public void TowardToAngle(int Direction256, float Speed, bool DoLookAt)
+    public void TowardToAngle(int Direction256, float Speed, bool DoLookAt, float Delta)
     {
         if (DoLookAt)
-            Angle = Direction256 / PIConv256;
-        X += (float)(Sin256(Direction256) * Speed);
-        Y -= (float)(Cos256(Direction256) * Speed);
+            Angle = Direction256 / -PIConv256;
+        X += (float)(Sin256(Direction256) * Speed * Delta);
+        Y -= (float)(Cos256(Direction256) * Speed * Delta);
     }
     bool SameValue(float A, float B, float Epsilon)
     {
@@ -815,49 +815,51 @@ public class SpriteEx : Sprite
 
     // toward(rotate self angle automation)(straight) move direction
     // and move by rotation speed(to destination angle)
-    public void RotateToAngle(int Direction, float RotateSpeed, float MoveSpeed)
+    public void RotateToAngle(int Direction, float RotateSpeed, float MoveSpeed, float Delta)
     {
         DestAngle = Direction;
         if (!SameValue(SrcAngle, DestAngle, RotateSpeed + 1))
         {
             if (SpriteUtils.AngleDiff(SrcAngle, DestAngle) > 0)
-                SrcAngle = SrcAngle + RotateSpeed;
+                SrcAngle = SrcAngle + RotateSpeed * Delta;
             if (SpriteUtils.AngleDiff(SrcAngle, DestAngle) < 0)
-                SrcAngle = SrcAngle - RotateSpeed;
+                SrcAngle = SrcAngle - RotateSpeed * Delta;
         }
         if (SrcAngle > 255)
             SrcAngle = SrcAngle - 255;
         if (SrcAngle < 0)
             SrcAngle = 255 + SrcAngle;
-        Angle = SrcAngle / PIConv256;
-        X += (float)(Sin256((int)SrcAngle) * MoveSpeed);
-        Y -= (float)(Cos256((int)SrcAngle) * MoveSpeed);
+        Angle = SrcAngle / -PIConv256;
+        X += (float)(Sin256((int)SrcAngle) * MoveSpeed * Delta);
+        Y -= (float)(Cos256((int)SrcAngle) * MoveSpeed * Delta);
     }
 
     // toward(rotate self angle automation)(straight) move  direction
     // and move by rotation speed(to destination position)
+
     public void RotateToPos(int TargetX, int TargetY, float RotateSpeed, float MoveSpeed, float Delta)
     {
         DestAngle = GetAngle256((int)X, (int)Y, TargetX, TargetY);
+
         if (!SameValue(SrcAngle, DestAngle, RotateSpeed + 1))
         {
             if (SpriteUtils.AngleDiff(SrcAngle, DestAngle) > 0)
-                SrcAngle = SrcAngle + RotateSpeed;
+                SrcAngle = SrcAngle + RotateSpeed * Delta;
             if (SpriteUtils.AngleDiff(SrcAngle, DestAngle) < 0)
-                SrcAngle = SrcAngle - RotateSpeed;
+                SrcAngle = SrcAngle - RotateSpeed * Delta;
         }
         if (SrcAngle > 255)
             SrcAngle = SrcAngle - 255;
         if (SrcAngle < 0)
             SrcAngle = 255 + SrcAngle;
-        Angle = SrcAngle / PIConv256;
+        Angle = SrcAngle / -PIConv256;
         X += (float)(Sin256((int)SrcAngle) * MoveSpeed * Delta);
         Y -= (float)(Cos256((int)SrcAngle) * MoveSpeed * Delta);
     }
 
     // move by rotation speed to destination angle,but not straight direction(no rotate self)
     // but can be custom angle
-    public void CircleToAngle(int Direction, int LookAtX, int LookAtY, float RotateSpeed, float MoveSpeed, bool DoLookAt)
+    public void CircleToAngle(int Direction, int LookAtX, int LookAtY, float RotateSpeed, float MoveSpeed, bool DoLookAt, float Delta)
     {
         if (DoLookAt)
             LookAt(LookAtX, LookAtY);
@@ -865,21 +867,21 @@ public class SpriteEx : Sprite
         if (!SameValue(SrcAngle, DestAngle, RotateSpeed + 1))
         {
             if (SpriteUtils.AngleDiff(SrcAngle, DestAngle) > 0)
-                SrcAngle = SrcAngle + RotateSpeed;
+                SrcAngle = SrcAngle + RotateSpeed * Delta;
             if (SpriteUtils.AngleDiff(SrcAngle, DestAngle) < 0)
-                SrcAngle = SrcAngle - RotateSpeed;
+                SrcAngle = SrcAngle - RotateSpeed * Delta;
         }
         if (SrcAngle > 255)
             SrcAngle = SrcAngle - 255;
         if (SrcAngle < 0)
             SrcAngle = 255 + SrcAngle;
-        X += (float)(Sin256((int)SrcAngle) * MoveSpeed);
-        Y -= (float)(Cos256((int)SrcAngle) * MoveSpeed);
+        X += (float)(Sin256((int)SrcAngle) * MoveSpeed * Delta);
+        Y -= (float)(Cos256((int)SrcAngle) * MoveSpeed * Delta);
     }
 
     // move by rotation speed to destination position,but not straight direction(no rotae self)
     // but can be custom angle
-    public void CircleToPos(int TargetX, int TargetY, int LookAtX, int LookAtY, float RotateSpeed, float MoveSpeed, bool DoLookAt)
+    public void CircleToPos(int TargetX, int TargetY, int LookAtX, int LookAtY, float RotateSpeed, float MoveSpeed, bool DoLookAt, float Delta)
     {
         if (DoLookAt)
             LookAt(LookAtX, LookAtY);
@@ -887,16 +889,16 @@ public class SpriteEx : Sprite
         if (!SameValue(SrcAngle, DestAngle, RotateSpeed + 1))
         {
             if (SpriteUtils.AngleDiff(SrcAngle, DestAngle) > 0)
-                SrcAngle = SrcAngle + RotateSpeed;
+                SrcAngle = SrcAngle + RotateSpeed * Delta;
             if (SpriteUtils.AngleDiff(SrcAngle, DestAngle) < 0)
-                SrcAngle = SrcAngle - RotateSpeed;
+                SrcAngle = SrcAngle - RotateSpeed * Delta;
         }
         if (SrcAngle > 255)
             SrcAngle = SrcAngle - 255;
         if (SrcAngle < 0)
             SrcAngle = 255 + SrcAngle;
-        X += (float)(Sin256((int)SrcAngle) * MoveSpeed);
-        Y -= (float)(Cos256((int)SrcAngle) * MoveSpeed);
+        X += (float)(Sin256((int)SrcAngle) * MoveSpeed * Delta);
+        Y -= (float)(Cos256((int)SrcAngle) * MoveSpeed * Delta);
     }
     public void Attach(Sprite Sprite)
     {
@@ -1011,7 +1013,7 @@ public class SpriteEx : Sprite
     }
     public override void DoDraw()
     {
-        if(!ImageLib.ContainsKey(ImageName)) return;
+        if (!ImageLib.ContainsKey(ImageName)) return;
         switch (SpriteSheetMode)
         {
             case SpriteSheetMode.NoneSingle:
@@ -1341,16 +1343,16 @@ public class AnimatedSprite : SpriteEx
             AnimPos = animStart;
             ImageIndex = (int)AnimPos;
         }
-        
+
         AnimCount = AnimationLib[AnimName].Count;
         if (ImageIndex >= AnimCount)
             ImageIndex = 0;
         ImageName = AnimationLib[AnimName][ImageIndex].ImageName;
         OriginX = AnimationLib[AnimName][ImageIndex].OriginX;
         OriginY = AnimationLib[AnimName][ImageIndex].OriginY;
-        if(FlipX)
+        if (FlipX)
         {
-           OriginX = (AnimationLib[AnimName][ImageIndex].OriginX*-1)+ AnimationLib[AnimName][ImageIndex].CropArea.Width;
+            OriginX = (AnimationLib[AnimName][ImageIndex].OriginX * -1) + AnimationLib[AnimName][ImageIndex].CropArea.Width;
         }
         if (FlipY)
         {
