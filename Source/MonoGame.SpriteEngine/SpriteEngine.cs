@@ -756,7 +756,14 @@ public class SpriteEx : Sprite
         return (int)(Math.Atan2(X, Y) * PIConv256) + 128;
     }
     public int GetAngle256(int SrcX, int SrcY, int DestX, int DestY)
-    {
+    { /*
+        if (SrcX == DestX)
+        {
+            return 128;
+            if (SrcY < DestY)
+                return 0;
+        }
+        */
         return (int)(Math.Atan2(DestX - SrcX, DestY - SrcY) * PIConv256) + 128;
     }
     public double Cos256(int i)
@@ -773,10 +780,11 @@ public class SpriteEx : Sprite
     }
     public void TowardToAngle(int Direction256, float Speed, bool DoLookAt, float Delta)
     {
-        if (DoLookAt)
-            Angle = Direction256 / -PIConv256;
+       // if (DoLookAt)
+         //   Angle = Direction256 / -PIConv256;
         X += (float)(Sin256(Direction256) * Speed * Delta);
         Y -= (float)(Cos256(Direction256) * Speed * Delta);
+      
     }
     bool SameValue(float A, float B, float Epsilon)
     {
@@ -1108,13 +1116,13 @@ public class AnimatedSprite : SpriteEx
 {
     public AnimatedSprite(Sprite Parent) : base(Parent)
     {
+        SpriteSheetMode = SpriteSheetMode.FixedSize;
         DoAnimate = true;
         PatternWidth = 64;
         PatternHeight = 64;
-        PatternIndex = 0;
         Width = 64;
         Height = 64;
-        SpriteSheetMode = SpriteSheetMode.FixedSize;
+        
     }
 
     public AnimatedSprite(Sprite Parent, Dictionary<string, Microsoft.Xna.Framework.Graphics.Texture2D> ImageLib,

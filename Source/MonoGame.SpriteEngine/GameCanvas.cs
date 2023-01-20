@@ -23,7 +23,7 @@ public class GameCanvas
     public GameCanvas(GraphicsDevice graphicGDevice)
     {
 
-       
+
         blendState[0] = new BlendState
         {
             ColorSourceBlend = Blend.Zero,
@@ -116,7 +116,7 @@ public class GameCanvas
     public GraphicsDevice GraphicsDevice;
     private BlendState[] blendState = new BlendState[15];
     public SpriteBatchEx SpriteBatch;
-   
+
 
     public void Draw(Texture2D Texture, float X, float Y, BlendMode BlendMode = BlendMode.Normal)
     {
@@ -283,10 +283,17 @@ public class GameCanvas
         SpriteBatch.End();
     }
 
-    public void DrawString(string KeyName,string Text,int X,int Y,Color Color)
+    public void DrawRotate(Texture2D Texture, float X, float Y, float Rotation, BlendMode BlendMode = BlendMode.Normal)
+    {
+
+        DrawEx(Texture, X, Y, 0, 0, 1, 1, Rotation, false, false, 255, 255, 255, 255, true, BlendMode);
+
+    }
+
+    public void DrawString(string KeyName, string Text, int X, int Y, Color Color)
     {
         SpriteBatch.Begin();
-        SpriteBatch.DrawStringEx(EngineFunc.Fonts[KeyName],Text,new Vector2(X,Y),Color);
+        SpriteBatch.DrawStringEx(EngineFunc.Fonts[KeyName], Text, new Vector2(X, Y), Color);
         SpriteBatch.End();
     }
 
