@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using MonoGame.SpriteEngine;
+using Mouse=SpriteEngine.Mouse;
 namespace SpaceShooter
 {
     public class Game1 : Game
@@ -12,7 +13,9 @@ namespace SpaceShooter
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            _graphics.PreferredBackBufferWidth = 1024;
+            _graphics.PreferredBackBufferHeight = 768;
+          
             IsMouseVisible = true;
         }
 
@@ -21,6 +24,8 @@ namespace SpaceShooter
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            EngineFunc.Init("Images/", this.GraphicsDevice);
+            GameFunc.CreateGame();
         }
 
         protected override void LoadContent()
@@ -36,8 +41,10 @@ namespace SpaceShooter
                 Exit();
 
             // TODO: Add your update logic here
-
+            GameFunc.UpdataGame(1);
             base.Update(gameTime);
+
+           
         }
 
         protected override void Draw(GameTime gameTime)
@@ -45,6 +52,12 @@ namespace SpaceShooter
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            GameFunc.SpaceLayer.Draw();
+            GameFunc.MistLayer1.Draw();
+            GameFunc.MistLayer2.Draw();
+            EngineFunc.SpriteEngine.Draw();
+            var Angle = SpriteUtils.GetAngle256( Mouse.State.X - 512, Mouse.State.Y - 384) * 0.025f;
+            EngineFunc.Canvas.DrawRotate(EngineFunc.ImageLib["cursor.png"], Mouse.State.X, Mouse.State.Y,Angle,BlendMode.AddtiveColor);
 
             base.Draw(gameTime);
         }
