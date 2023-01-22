@@ -35,7 +35,7 @@ public class Bullet : AnimatedSprite
         TowardToAngle((int)(Angle * 40.74), MoveSpeed, true, Delta);
         Counter++;
         Collision();
-        if ((AnimPos >= 15) && (ImageName == "Explosion3"))
+        if (ImageName == "Explosion3.png" && AnimEnded())
             Dead();
         if (Counter > 250)
             Dead();
@@ -76,6 +76,8 @@ public class PlayerBullet : AnimatedSprite
 
     public override void OnCollision(Sprite sprite)
     {
+
+        var Random = new Random();
         if (sprite is Asteroids)
         {
             //PlaySound('Hit.wav');
@@ -85,7 +87,7 @@ public class PlayerBullet : AnimatedSprite
             SetAnim("Explosions.png", 0, 12, 0.3f, false, false, true);
             var Asteroids = (Asteroids)sprite;
             // if (AnimPos < 1)
-            //  Asteroids.BlendMode = BlendMode.Subtractive;
+            Asteroids.SetColor(250, 0, 0);
 
             Asteroids.Life -= 1;
 
@@ -93,39 +95,60 @@ public class PlayerBullet : AnimatedSprite
             {
                 // PlaySound('Explode.wav');
                 Asteroids.MoveSpeed = 0;
-               
-                var Random = new Random();
+
+              
                 for (int i = 0; i < 128; i++)
                 {
                     var Explosion = new Explosion(EngineFunc.SpriteEngine);
                     Explosion.ImageLib = EngineFunc.ImageLib;
                     Explosion.ImageName = "Particle2.png";
-                    //plosion.SpriteSheetMode=SpriteSheetMode.FixedSize;
                     Explosion.SetPattern(32, 32);
-                   // Explosion.DoMove(1);
-                  //  Explosion.PatternIndex = 7;
                     Explosion.SetSize(32, 32);
                     Explosion.BlendMode = BlendMode.AddtiveColor;
-                    Explosion.X = Asteroids.X + -Random.Next(0, 60);
-                    Explosion.Y = Asteroids.Y - Random.Next(0, 60);
+                    Explosion.X = Asteroids.X + -Random.Next(60);
+                    Explosion.Y = Asteroids.Y - Random.Next(60);
                     Explosion.Z = 4850;
                     Explosion.ScaleX = 3;
                     Explosion.ScaleY = 3;
-                   
-                    //Red= 255;
-                    // Green= 100;
-                    // Blue= 101;
                     Explosion.Acceleration = 0.252f;
                     Explosion.MinSpeed = 1;
-                    Explosion.MaxSpeed = -(0.31f + Random.Next(0, 2))+2;
+                    Explosion.MaxSpeed = -(0.31f + Random.Next(2)) + 2;
                     Explosion.Direction = i * 2;
-
                 }
-                GameFunc.CreateBonus("Money.png",(int)Asteroids.X,(int)Asteroids.Y);
-                 Asteroids.Dead();
+                GameFunc.CreateBonus("Money.png", (int)Asteroids.X, (int)Asteroids.Y);
+                Asteroids.Dead();
             }
-
         }
+
+
+        if (sprite is Enemy)
+        {
+            CanCollision = false;
+            MoveSpeed = 0;
+            SetPattern(64, 64);
+            SetAnim("Explosion3.png", 0, 12, 0.3f, false, false, true);
+            var Enemy = (Enemy)sprite;
+            if (AnimPos < 1)
+            {
+                Enemy.BlendMode = BlendMode.AddtiveColor;
+                Enemy.Life -= 1;
+            }
+            if (Enemy.Life <= 0)
+            {
+                Enemy.MoveSpeed = 0;
+                Enemy.RotateSpeed = 0;
+                Enemy.DestAngle = 0;
+                Enemy.LookAt = false;
+                Enemy.BlendMode = BlendMode.AddtiveColor;
+                Enemy.ScaleX = 2.5f;
+                Enemy.ScaleY = 2.5f;
+                Enemy.SpriteSheetMode=SpriteSheetMode.FixedSize;
+                Enemy.SetPattern(64, 64);
+                Enemy.SetAnim("Explosion2.png", 0, 16, 0.15f, false, false, true);
+                GameFunc.CreateBonus("Bonus" + Random.Next(3).ToString() +".png", (int)Enemy.X, (int)Enemy.Y);
+            }
+        }
+
 
     }
 
@@ -173,13 +196,13 @@ public class Enemy : AnimatedSprite
         {
             case EnemyType.Ship:
                 CollidePos = new Vector2(X + 64, Y + 64);
-                switch (Random.Next(0, 100))
+                switch (Random.Next(100))
                 {
                     case 40:
                     case 41:
                     case 42:
                     case 43:
-                        DestAngle = Random.Next(0, 256);
+                        DestAngle = Random.Next(256);
                         break;
                     case 51:
                     case 52:
@@ -191,7 +214,7 @@ public class Enemy : AnimatedSprite
                 break;
             case EnemyType.SquareShip:
                 CollidePos = new Vector2(X + 30, Y + 30);
-                switch (Random.Next(0, 100))
+                switch (Random.Next(100))
                 {
                     case 40:
                     case 41:
@@ -199,8 +222,8 @@ public class Enemy : AnimatedSprite
                     case 43:
                     case 44:
                     case 45:
-                        DestX = Random.Next(0, 10000);
-                        DestY = Random.Next(0, 10000);
+                        DestX = Random.Next(10000);
+                        DestY = Random.Next(10000);
                         break;
                     case 51:
                     case 52:
@@ -214,7 +237,7 @@ public class Enemy : AnimatedSprite
 
             case EnemyType.AnimShip:
                 CollidePos = new Vector2(X + 20, Y + 20);
-                switch (Random.Next(0, 100))
+                switch (Random.Next(100))
                 {
                     case 40:
                     case 41:
@@ -222,8 +245,8 @@ public class Enemy : AnimatedSprite
                     case 43:
                     case 44:
                     case 45:
-                        DestX = Random.Next(0, 8000);
-                        DestY = Random.Next(0, 6000);
+                        DestX = Random.Next(8000);
+                        DestY = Random.Next(6000);
                         break;
                     case 51:
                     case 52:
@@ -238,7 +261,7 @@ public class Enemy : AnimatedSprite
 
             case EnemyType.Mine:
                 CollidePos = new Vector2(X + 32, Y + 32);
-                switch (Random.Next(0, 300))
+                switch (Random.Next(300))
                 {
                     case 150:
                         DestX = (int)GameFunc.PlayerShip.X;
@@ -261,7 +284,7 @@ public class Enemy : AnimatedSprite
         {
             if (InOffScreen())
             {
-                if (Random.Next(0, 100) == 50)
+                if (Random.Next(100) == 50)
                 {
                     Bullet = new Bullet(EngineFunc.SpriteEngine);
                     Bullet.ImageLib = EngineFunc.ImageLib;
@@ -297,7 +320,7 @@ public class Asteroids : AnimatedSprite
 
         base.DoMove(Delta);
 
-
+        SetColor(255, 255, 255);
         X = PosX + (float)Math.Cos(Step / (30)) * Range - (float)(Math.Sin(Step / (20)) * Range);
         Y = PosY + (float)Math.Sin(Step / (30 + Seed)) * Range + (float)(Math.Cos(Step / (20)) * Range);
         Step += MoveSpeed * Delta;
@@ -336,12 +359,13 @@ public class Explosion : PlayerSprite
 {
     public Explosion(Sprite Parent) : base(Parent)
     {
-       
+
     }
 
     public override void DoMove(float Delta)
     {
-        base.DoMove(Delta);
+        //base.DoMove(Delta);
+
         Accelerate();
         UpdatePos(1 * Delta);
         Alpha -= 2;
@@ -360,7 +384,7 @@ public class Spark : PlayerSprite
         base.DoMove(Delta);
         Accelerate();
         UpdatePos(1 * Delta);
-        Alpha -= 1;
+        Alpha -= 2;
         if (Alpha < 2)
             Dead();
     }
@@ -389,20 +413,22 @@ public class PlayerShip : PlayerSprite
             Accelerate();
         if (DoDeccelerate)
             Deccelerate();
-        //  DoAccelerate= true;
-        // DoDeccelerate = false;
 
         if (ImageName == "PlayerShip.png")
         {
-
-            //SpriteSheetMode = SpriteSheetMode.NoneSingle;
             UpdatePos(1 * Delta);
-
+            Angle = GetAngle256(Mouse.State.X - 512, Mouse.State.Y - 384) / 40.7f;
+            Direction = GetAngle256(Mouse.State.X - 512, Mouse.State.Y - 384);
             if (Mouse.RightPressed())
-                TowardToPos(Mouse.State.X + (int)Engine.Camera.X, Mouse.State.Y + (int)Engine.Camera.Y, 4, true, false, Delta);
+            {
+                DoAccelerate = true;
+                DoDeccelerate = false;
+            }
             else
-                LookAt(Mouse.State.X + (int)Engine.Camera.X, Mouse.State.Y + (int)Engine.Camera.Y);
-
+            {
+                DoAccelerate = false;
+                DoDeccelerate = true;
+            }
         }
         if ((AnimPos >= 32) && (ImageName == "Explode.png"))
         {
@@ -462,7 +488,11 @@ public class PlayerShip : PlayerSprite
                 case "Bonus2.png": GameFunc.Score += 300; break;
                 case "Money.png": GameFunc.Score += 500; break;
             }
-            GameFunc.CreateSpark(Bonus.X, Bonus.Y);
+            var Random = new Random();
+            if (Random.Next(2) == 0)
+                GameFunc.CreateSpark("Star1.png", Bonus.X, Bonus.Y);
+            else
+                GameFunc.CreateSpark("Star2.png", Bonus.X, Bonus.Y);
             Bonus.Dead();
         }
         if (sprite is Bullet)
@@ -552,7 +582,7 @@ public class Fort : AnimatedSprite
         if (AnimPos >= 1 && ImageName == "Explosion2.png")
             CanCollision = false;
         var Random = new Random();
-        if (Random.Next(0, 150) == 50)
+        if (Random.Next(150) == 50)
         {
             if ((X > Engine.Camera.X) && (Y > Engine.Camera.Y) && (X < Engine.Camera.X + 800) && (Y < Engine.Camera.Y + 600))
             {
@@ -584,6 +614,7 @@ public class GameFunc
     public static MonoSpriteEngine SpaceLayer;
     public static MonoSpriteEngine MistLayer1;
     public static MonoSpriteEngine MistLayer2;
+    public static int Counter;
 
     public static void CreateGame()
     {
@@ -601,18 +632,18 @@ public class GameFunc
             var Enemy = new Enemy(EngineFunc.SpriteEngine);
             Enemy.ImageLib = EngineFunc.ImageLib;
             Enemy.Type = (EnemyType)Random.Next(Enum.GetNames(typeof(EnemyType)).Length);
-            Enemy.X = Random.Next(0, 8000) - 2500;
-            Enemy.Y = Random.Next(0, 8000) - 2500;
+            Enemy.X = Random.Next(8000) - 2500;
+            Enemy.Y = Random.Next(8000) - 2500;
             Enemy.Z = 10000;
             Enemy.CanCollision = true;
-            Enemy.MoveSpeed = 1 + (Random.Next(0, 4) * 0.5f);
-            Enemy.RotateSpeed = 0.5f + (Random.Next(0, 4) * 0.4f);
+            Enemy.MoveSpeed = 1 + (Random.Next(4) * 0.5f);
+            Enemy.RotateSpeed = 0.5f + (Random.Next(4) * 0.4f);
             Enemy.DoCenter = true;
-            Enemy.Life = 4;
+            Enemy.Life = 2;
             switch (Enemy.Type)
             {
                 case EnemyType.Ship:
-                    Enemy.ImageName = "Ship" + (Random.Next(0, 2)).ToString() + ".png";
+                    Enemy.ImageName = "Ship" + (Random.Next(2)).ToString() + ".png";
                     Enemy.SpriteSheetMode = SpriteSheetMode.NoneSingle;
                     Enemy.SetSize(128, 128);
                     Enemy.CollideRadius = 40;
@@ -620,7 +651,7 @@ public class GameFunc
                     Enemy.ScaleY = 0.8f;
                     break;
                 case EnemyType.SquareShip:
-                    Enemy.ImageName = "SquareShip" + Random.Next(0, 2).ToString() + ".png";
+                    Enemy.ImageName = "SquareShip" + Random.Next(2).ToString() + ".png";
                     Enemy.CollideRadius = 30;
                     Enemy.SpriteSheetMode = SpriteSheetMode.NoneSingle;
                     Enemy.LookAt = true;
@@ -631,7 +662,7 @@ public class GameFunc
                     break;
 
                 case EnemyType.AnimShip:
-                    Enemy.ImageName = "AnimShip" + Random.Next(0, 2).ToString() + ".png";
+                    Enemy.ImageName = "AnimShip" + Random.Next(2).ToString() + ".png";
                     Enemy.CollideRadius = 25;
 
                     if (Enemy.ImageName == "AnimShip1.png")
@@ -669,9 +700,9 @@ public class GameFunc
         {
             var Asteroids = new Asteroids(EngineFunc.SpriteEngine);
             Asteroids.ImageLib = EngineFunc.ImageLib;
-            Asteroids.ImageName = "Roids" + Random.Next(0, 3).ToString() + ".png";
-            Asteroids.PosX = Random.Next(0, 8000) - 2500;
-            Asteroids.PosY = Random.Next(0, 8000) - 2500;
+            Asteroids.ImageName = "Roids" + Random.Next(3).ToString() + ".png";
+            Asteroids.PosX = Random.Next(8000) - 2500;
+            Asteroids.PosY = Random.Next(8000) - 2500;
             Asteroids.Z = 4800;
             Asteroids.DoCenter = true;
             switch (Asteroids.ImageName)
@@ -681,10 +712,10 @@ public class GameFunc
                 case "Roids2.png": Asteroids.SetPattern(128, 128); Asteroids.AnimSpeed = 0.25f; Asteroids.CollideRadius = 50; break;
             }
             Asteroids.SetAnim(Asteroids.ImageName, 0, Asteroids.PatternCount, 0.15f, true, false, true);
-            Asteroids.MoveSpeed = RndF[Random.Next(0, 2)];
-            Asteroids.Range = 150 + Random.Next(0, 200);
-            Asteroids.Step = Random.Next(0, 1512);
-            Asteroids.Seed = 50 + Random.Next(0, 100);
+            Asteroids.MoveSpeed = RndF[Random.Next(2)];
+            Asteroids.Range = 150 + Random.Next(200);
+            Asteroids.Step = Random.Next(1512);
+            Asteroids.Seed = 50 + Random.Next(100);
             Asteroids.Life = 6;
             Asteroids.CanCollision = true;
             Asteroids.Width = Asteroids.PatternWidth;
@@ -704,7 +735,7 @@ public class GameFunc
         PlayerShip.Acceleration = 0.05f;
         PlayerShip.Decceleration = 0.02f;
         PlayerShip.MinSpeed = 0;
-        PlayerShip.MaxSpeed = 2.5f;
+        PlayerShip.MaxSpeed = 3.5f;
         PlayerShip.Z = 5000;
         PlayerShip.CanCollision = true;
         PlayerShip.CollideRadius = 25;
@@ -755,9 +786,9 @@ public class GameFunc
         for (int i = 0; i < 100; i++)
         {
             var Planet = new SpriteEx(SpaceLayer,
-                EngineFunc.ImageLib, "planet" + Random.Next(0, 4).ToString() + ".png",
+                EngineFunc.ImageLib, "planet" + Random.Next(4).ToString() + ".png",
                 0, 0,
-                Random.Next(0, 25) * 300 - 2500, Random.Next(0, 25) * 300 - 2500, 100);
+                Random.Next(0, 25) * 300 - 2500, Random.Next(25) * 300 - 2500, 100);
             Planet.SetSize(Planet.ImageWidth, Planet.ImageHeight);
         }
         // create a huge endless space
@@ -801,6 +832,34 @@ public class GameFunc
     {
         Mouse.GetState();
 
+        Counter += 1;
+        if (Counter % 4 == 0)
+        {
+            if (PlayerShip.ImageName == "PlayerShip.png")
+            {
+                var Tail = new Tail(EngineFunc.SpriteEngine);
+                Tail.ImageLib = EngineFunc.ImageLib;
+                Tail.ImageName = "tail.png";
+                Tail.SetPattern(64, 64);
+                Tail.SetSize(64, 64);
+                Tail.BlendMode = BlendMode.AddtiveColor;
+                Tail.ScaleX = 0.1f;
+                Tail.ScaleY = 0.1f;
+                Tail.X = 510 + Tail.Engine.Camera.X;
+                Tail.Y = 382 + Tail.Engine.Camera.Y;
+                Tail.Z = 4000;
+                Tail.DoCenter = true;
+                Tail.Acceleration = 2.51f;
+                Tail.MinSpeed = 1;
+                if (PlayerShip.Speed < 1)
+                    Tail.MaxSpeed = 2;
+                else
+                    Tail.MaxSpeed = 0.5f;
+                Tail.Direction = -128 + PlayerShip.Direction;
+            }
+
+        }
+
         EngineFunc.SpriteEngine.Dead();
         EngineFunc.SpriteEngine.Move(Delta);
         SpaceLayer.Camera.X = EngineFunc.SpriteEngine.Camera.X * 0.71f * Delta;
@@ -817,14 +876,14 @@ public class GameFunc
     public static void CreateBonus(string BonusName, int PosX, int PosY)
     {
         var Random = new Random();
-        if (Random.Next(0, 2) == 1 )
+        if (Random.Next(2) == 1)
         {
             var Bonus = new Bonus(EngineFunc.SpriteEngine);
             Bonus.ImageLib = EngineFunc.ImageLib;
             Bonus.ImageName = BonusName;
             Bonus.Width = Bonus.PatternWidth;
             Bonus.Height = Bonus.PatternHeight;
-            Bonus.SetPattern(32,32);
+            Bonus.SetPattern(32, 32);
             Bonus.MoveSpeed = 0.251f;
             Bonus.PX = PosX - 50;
             Bonus.PY = PosY - 100;
@@ -838,26 +897,27 @@ public class GameFunc
         }
     }
 
-    public static void CreateSpark(float PosX, float PosY)
+    public static void CreateSpark(string ImageName, float PosX, float PosY)
     {
         var Random = new Random();
         for (int i = 0; i < 128; i++)
         {
             var Spark = new Spark(EngineFunc.SpriteEngine);
             Spark.ImageLib = EngineFunc.ImageLib;
-            Spark.ImageName = "Particles" + Random.Next(0, 2).ToString() + ".png";
+            Spark.ImageName = ImageName;
             Spark.BlendMode = BlendMode.AddtiveColor;
             Spark.SetPattern(32, 32);
+            Spark.DoMove(1);
+            Spark.PatternIndex = Random.Next(7);
             Spark.SetSize(32, 32);
-            Spark.PatternIndex = Random.Next(0, 7);
-            Spark.X = PosX + -Random.Next(0, 30);
-            Spark.Y = PosY + Random.Next(0, 30);
+            Spark.X = PosX + -Random.Next(30);
+            Spark.Y = PosY + Random.Next(30);
             Spark.Z = 12000;
             Spark.ScaleX = 1.2f;
             Spark.ScaleY = 1.2f;
-            Spark.Acceleration = 0.03f;
-            Spark.MinSpeed = 0.8f;
-            Spark.MaxSpeed = (float)-(0.5 + Random.Next(2));
+            Spark.Acceleration = 0.02f;
+            Spark.MinSpeed = 1.8f;
+            Spark.MaxSpeed = (float)-(0.4 + Random.Next(3));
             Spark.Direction = i * 2;
         }
     }
