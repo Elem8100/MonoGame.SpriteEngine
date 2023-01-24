@@ -9,7 +9,9 @@
       "SpaceShooter/1.0.0": {
         "dependencies": {
           "MonoGame.Content.Builder.Task": "3.8.1.303",
-          "MonoGame.Framework.WindowsDX": "3.8.1.303"
+          "MonoGame.Framework.WindowsDX": "3.8.1.303",
+          "Bass.Net": "2.4.17.2",
+          "MonoGame.SpriteEngine": "1.0.0.0"
         },
         "runtime": {
           "SpaceShooter.dll": {}
@@ -1474,6 +1476,22 @@
           "System.Xml.XDocument": "4.0.11",
           "System.Xml.XPath": "4.0.1"
         }
+      },
+      "Bass.Net/2.4.17.2": {
+        "runtime": {
+          "Bass.Net.dll": {
+            "assemblyVersion": "2.4.17.2",
+            "fileVersion": "2.4.17.2"
+          }
+        }
+      },
+      "MonoGame.SpriteEngine/1.0.0.0": {
+        "runtime": {
+          "MonoGame.SpriteEngine.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -2329,6 +2347,16 @@
       "sha512": "sha512-FLhdYJx4331oGovQypQ8JIw2kEmNzCsjVOVYY/16kZTUoquZG85oVn7yUhBE2OZt1yGPSXAL0HTEfzjlbNpM7Q==",
       "path": "system.xml.xpath.xdocument/4.0.1",
       "hashPath": "system.xml.xpath.xdocument.4.0.1.nupkg.sha512"
+    },
+    "Bass.Net/2.4.17.2": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MonoGame.SpriteEngine/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }
