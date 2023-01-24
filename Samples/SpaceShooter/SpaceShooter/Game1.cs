@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.SpriteEngine;
-using Mouse=SpriteEngine.Mouse;
+using Mouse = SpriteEngine.Mouse;
 namespace SpaceShooter
 {
     public class Game1 : Game
@@ -15,8 +15,8 @@ namespace SpaceShooter
             _graphics = new GraphicsDeviceManager(this);
             _graphics.PreferredBackBufferWidth = 1024;
             _graphics.PreferredBackBufferHeight = 768;
-          
-            IsMouseVisible = true;
+
+            IsMouseVisible = false;
         }
 
         protected override void Initialize()
@@ -26,6 +26,7 @@ namespace SpaceShooter
             base.Initialize();
             EngineFunc.Init("Images/", this.GraphicsDevice);
             GameFunc.CreateGame();
+            EngineFunc.AddFont(this.GraphicsDevice, "Arial10", "Courier New", 15);
         }
 
         protected override void LoadContent()
@@ -41,10 +42,10 @@ namespace SpaceShooter
                 Exit();
 
             // TODO: Add your update logic here
-            GameFunc.UpdataGame(1);
+            GameFunc.UpdataGame((float)gameTime.ElapsedGameTime.TotalMilliseconds / 16.6f);
             base.Update(gameTime);
 
-           
+
         }
 
         protected override void Draw(GameTime gameTime)
@@ -56,9 +57,12 @@ namespace SpaceShooter
             GameFunc.MistLayer1.Draw();
             GameFunc.MistLayer2.Draw();
             EngineFunc.SpriteEngine.Draw();
-            var Angle = SpriteUtils.GetAngle256( Mouse.State.X - 512, Mouse.State.Y - 384) * 0.025f;
-            EngineFunc.Canvas.DrawRotate(EngineFunc.ImageLib["cursor.png"], Mouse.State.X, Mouse.State.Y,Angle,BlendMode.AddtiveColor);
-
+            var Angle = SpriteUtils.GetAngle256(Mouse.State.X - 512, Mouse.State.Y - 384) * 0.025f;
+            EngineFunc.Canvas.DrawRotate(EngineFunc.ImageLib["cursor.png"], Mouse.State.X, Mouse.State.Y, Angle, BlendMode.AddtiveColor);
+            EngineFunc.Canvas.DrawString("Arial10", "Score:" + GameFunc.Score.ToString(), 400, 10, Color.Yellow);
+            EngineFunc.Canvas.DrawPattern(EngineFunc.ImageLib["Shield.png"], 20, 640, 16 - (int)GameFunc.PlayerShip.Life, 111, 105, 0, 0, 1, 1, 0, false, false, 255, 255, 255, 255, false);
+           if(GameFunc.PlayerShip.Life<=0)
+                EngineFunc.Canvas.DrawString("Arial10", "GAME OVER", 400, 410, Color.Red);
             base.Draw(gameTime);
         }
     }

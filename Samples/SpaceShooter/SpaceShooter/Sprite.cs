@@ -2,13 +2,8 @@
 using MonoGame.SpriteEngine;
 using Microsoft.Xna.Framework.Input;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
-using Input = Microsoft.Xna.Framework.Input.Keys;
-using SharpDX.Direct3D11;
-using System.Diagnostics.Metrics;
-using System.Media;
 using System.Text.RegularExpressions;
 using Mouse = SpriteEngine.Mouse;
-
 namespace SpaceShooter;
 
 public enum EnemyType
@@ -56,7 +51,6 @@ public class PlayerBullet : AnimatedSprite
         Z = 4000;
         CanCollision = true;
         CollideRadius = 12;
-
     }
     private int Counter;
     public float MoveSpeed;
@@ -64,39 +58,36 @@ public class PlayerBullet : AnimatedSprite
     public override void DoMove(float Delta)
     {
         base.DoMove(Delta);
-
         TowardToAngle((int)(Angle * 40.7), MoveSpeed, true, Delta);
         CollidePos = new Vector2(X + 24, Y + 38);
-        if (Counter > 180)
+        Counter += 1;
+        if (Counter > 100)
             Dead();
         if (AnimPos >= 11)
             Dead();
         Collision();
     }
 
+
+
     public override void OnCollision(Sprite sprite)
     {
-
         var Random = new Random();
         if (sprite is Asteroids)
         {
-            //PlaySound('Hit.wav');
             CanCollision = false;
+            BassSound.Play("Hit.wav");
             MoveSpeed = 0;
             SetPattern(64, 64);
             SetAnim("Explosions.png", 0, 12, 0.3f, false, false, true);
             var Asteroids = (Asteroids)sprite;
-            // if (AnimPos < 1)
+
             Asteroids.SetColor(250, 0, 0);
-
             Asteroids.Life -= 1;
-
             if (Asteroids.Life <= 0)
             {
-                // PlaySound('Explode.wav');
+                BassSound.Play("Explode.wav");
                 Asteroids.MoveSpeed = 0;
-
-              
                 for (int i = 0; i < 128; i++)
                 {
                     var Explosion = new Explosion(EngineFunc.SpriteEngine);
@@ -123,6 +114,7 @@ public class PlayerBullet : AnimatedSprite
 
         if (sprite is Enemy)
         {
+            BassSound.Play("Hit.wav");
             CanCollision = false;
             MoveSpeed = 0;
             SetPattern(64, 64);
@@ -142,13 +134,34 @@ public class PlayerBullet : AnimatedSprite
                 Enemy.BlendMode = BlendMode.AddtiveColor;
                 Enemy.ScaleX = 2.5f;
                 Enemy.ScaleY = 2.5f;
-                Enemy.SpriteSheetMode=SpriteSheetMode.FixedSize;
+                Enemy.SpriteSheetMode = SpriteSheetMode.FixedSize;
                 Enemy.SetPattern(64, 64);
                 Enemy.SetAnim("Explosion2.png", 0, 16, 0.15f, false, false, true);
-                GameFunc.CreateBonus("Bonus" + Random.Next(3).ToString() +".png", (int)Enemy.X, (int)Enemy.Y);
+                GameFunc.CreateBonus("Bonus" + Random.Next(3).ToString() + ".png", (int)Enemy.X, (int)Enemy.Y);
             }
         }
 
+        if (sprite is Fort)
+        {
+            BassSound.Play("Hit.wav");
+            CanCollision = false;
+            MoveSpeed = 0;
+            SetPattern(64, 64);
+            SetAnim("Explosion3.png", 0, 12, 0.3f, false, false, true);
+            var Fort = (Fort)sprite;
+            if (AnimPos < 3)
+                Fort.SetColor(255, 0, 0);
+            Fort.Life -= 1;
+            if (Fort.Life <= 1)
+            {
+                Fort.BlendMode = BlendMode.AddtiveColor;
+                Fort.SpriteSheetMode = SpriteSheetMode.FixedSize;
+                Fort.ScaleX = 3;
+                Fort.ScaleY = 3;
+                Fort.SetPattern(64, 64);
+                Fort.SetAnim("Explosion2.png", 0, 16, 0.15f, false, false, true);
+            }
+        }
 
     }
 
@@ -159,7 +172,6 @@ public class Enemy : AnimatedSprite
     public Enemy(Sprite Parent) : base(Parent)
     {
     }
-
     public float MoveSpeed;
     public float TempMoveSpeed;
     public float RotateSpeed;
@@ -169,10 +181,9 @@ public class Enemy : AnimatedSprite
     public EnemyType Type;
     public int Life;
     public Bullet Bullet;
-
     private bool InOffScreen()
     {
-        if ((X > Engine.Camera.X - 50) && (Y > Engine.Camera.Y - 50) && (X < Engine.Camera.X + 1124) && (Y < Engine.Camera.Y + 778))
+        if ((X > Engine.Camera.X - 50) && (Y > Engine.Camera.Y - 50) && (X < Engine.Camera.X + 1124) && (Y < Engine.Camera.Y + 878))
             return true;
         else
             return false;
@@ -208,10 +219,10 @@ public class Enemy : AnimatedSprite
                     case 52:
                         DestAngle = GetAngle256((int)GameFunc.PlayerShip.X - (int)this.X, (int)GameFunc.PlayerShip.Y - (int)this.Y);
                         break;
-
                 }
                 RotateToAngle(DestAngle, RotateSpeed, MoveSpeed, Delta);
                 break;
+
             case EnemyType.SquareShip:
                 CollidePos = new Vector2(X + 30, Y + 30);
                 switch (Random.Next(100))
@@ -230,7 +241,6 @@ public class Enemy : AnimatedSprite
                         DestX = (int)GameFunc.PlayerShip.X;
                         DestY = (int)GameFunc.PlayerShip.Y;
                         break;
-
                 }
                 CircleToPos(DestX, DestY, (int)GameFunc.PlayerShip.X, (int)GameFunc.PlayerShip.Y, RotateSpeed, MoveSpeed, LookAt, Delta);
                 break;
@@ -278,7 +288,6 @@ public class Enemy : AnimatedSprite
                 TowardToPos(DestX, DestY, MoveSpeed, false, false, Delta);
                 break;
         }
-
         // enemy shoot bullet
         if ((Type == EnemyType.Ship) || (Type == EnemyType.SquareShip))
         {
@@ -296,9 +305,6 @@ public class Enemy : AnimatedSprite
                 }
             }
         }
-
-
-
     }
 
 }
@@ -314,7 +320,6 @@ public class Asteroids : AnimatedSprite
     public float MoveSpeed;
     public int Seed;
     public int PosX, PosY;
-
     public override void DoMove(float Delta)
     {
 
@@ -352,8 +357,6 @@ public class Bonus : AnimatedSprite
         Y = PY + (float)Math.Sin(Step / (90)) * 130 + (float)(Math.Cos(Step / (20)) * 110);
         Step += MoveSpeed * Delta;
     }
-
-
 }
 public class Explosion : PlayerSprite
 {
@@ -361,11 +364,9 @@ public class Explosion : PlayerSprite
     {
 
     }
-
     public override void DoMove(float Delta)
     {
         //base.DoMove(Delta);
-
         Accelerate();
         UpdatePos(1 * Delta);
         Alpha -= 2;
@@ -397,18 +398,15 @@ public class PlayerShip : PlayerSprite
 
     bool DoAccelerate;
     bool DoDeccelerate;
-    float Life;
+    public float Life=16;
     public PlayerBullet Bullet;
     bool Ready;
     int ReadyTime;
-
     public override void DoMove(float Delta)
     {
         base.DoMove(Delta);
         CollidePos = new Vector2(X + 20, Y + 20);
-
         Collision();
-
         if (DoAccelerate)
             Accelerate();
         if (DoDeccelerate)
@@ -432,7 +430,6 @@ public class PlayerShip : PlayerSprite
         }
         if ((AnimPos >= 32) && (ImageName == "Explode.png"))
         {
-
             ImageName = "PlayerShip.png";
             SpriteSheetMode = SpriteSheetMode.NoneSingle;
             BlendMode = BlendMode.Normal;
@@ -440,23 +437,27 @@ public class PlayerShip : PlayerSprite
             ScaleY = 1.2f;
         }
         if (Ready)
-            ReadyTime++;
-        if (ReadyTime == 350)
         {
+            ReadyTime++;
+            if (ImageName == "PlayerShip.png")
+                Alpha = 80;
+
+        }
+        if (ReadyTime == 300)
+        {
+            Alpha = 255;
             Ready = false;
             CanCollision = true;
         }
 
-
-
         Engine.Camera.X = X - 512;
         Engine.Camera.Y = Y - 384;
-
 
         if (Mouse.LeftClick)
         {
             if (ImageName == "PlayerShip.png")
             {
+                BassSound.Play("Shoot.wav");
                 Bullet = new PlayerBullet(EngineFunc.SpriteEngine);
                 Bullet.ImageLib = EngineFunc.ImageLib;
                 Bullet.ImageName = "bb.png";
@@ -473,13 +474,13 @@ public class PlayerShip : PlayerSprite
                 Bullet.CollideRadius = 10;
             }
         }
-
     }
 
     public override void OnCollision(Sprite sprite)
     {
         if (sprite is Bonus)
         {
+            BassSound.Play("GetBonus.wav");
             var Bonus = (Bonus)sprite;
             switch (Bonus.ImageName)
             {
@@ -498,7 +499,6 @@ public class PlayerShip : PlayerSprite
         if (sprite is Bullet)
         {
             GameFunc.PlayerShip.Life -= 0.25f;
-            // this.SetColor(255, 0, 0);
             var Bullet = (Bullet)sprite;
             Bullet.CanCollision = false;
             Bullet.MoveSpeed = 0;
@@ -511,6 +511,7 @@ public class PlayerShip : PlayerSprite
         }
         if ((sprite is Asteroids) || (sprite is Enemy))
         {
+            BassSound.Play("Explode.wav");
             Ready = true;
             ReadyTime = 0;
             GameFunc.PlayerShip.Life -= 0.25f;
@@ -536,7 +537,10 @@ public class Tail : PlayerSprite
     private int Counter;
     public override void DoMove(float Delta)
     {
+        if (GameFunc.PlayerShip.Alpha == 80)
+            Alpha = 50;
         base.DoMove(Delta);
+
         Alpha -= 6;
         if (GameFunc.PlayerShip.Speed < 1.1f)
         {
@@ -554,7 +558,6 @@ public class Tail : PlayerSprite
         Counter += 1;
         if (Counter > 25)
             Dead();
-
     }
 }
 
@@ -597,11 +600,8 @@ public class Fort : AnimatedSprite
                 Bullet.X = this.X + 5;
                 Bullet.Y = this.Y;
                 Bullet.Angle = this.Angle;
-
             }
-
         }
-
     }
 }
 
@@ -615,7 +615,6 @@ public class GameFunc
     public static MonoSpriteEngine MistLayer1;
     public static MonoSpriteEngine MistLayer2;
     public static int Counter;
-
     public static void CreateGame()
     {
         SpaceLayer = new MonoSpriteEngine(null);
@@ -626,7 +625,6 @@ public class GameFunc
         MistLayer2.Canvas = EngineFunc.Canvas;
         //create enemy
         var Random = new Random();
-
         for (int i = 0; i < 400; i++)
         {
             var Enemy = new Enemy(EngineFunc.SpriteEngine);
@@ -687,11 +685,8 @@ public class GameFunc
                     Enemy.CollideRadius = 16;
                     Enemy.RotateSpeed = 0.04f;
                     break;
-
-
             }
             Enemy.TempMoveSpeed = Enemy.MoveSpeed;
-
         }
 
         //create asteroids
@@ -739,8 +734,7 @@ public class GameFunc
         PlayerShip.Z = 5000;
         PlayerShip.CanCollision = true;
         PlayerShip.CollideRadius = 25;
-        // PlayerShip.X=2000;
-        //  PlayerShip.Y=2000;
+
         //create map
         string AllText = System.IO.File.ReadAllText("Map1.txt");
         string[] Section = AllText.Split('/');
@@ -776,10 +770,7 @@ public class GameFunc
                 Fort.X = X - 2000 + 22;
                 Fort.Y = Y - 2000 + 40;
                 Fort.Z = Z;
-
             }
-
-
         }
 
         // create planet
@@ -823,16 +814,20 @@ public class GameFunc
         mistLayer2.Y = 200;
         mistLayer2.BlendMode = BlendMode.AddtiveColor;
         mistLayer2.Z = 3;
-
-
-
+        BassSound.Init();
+        BassSound.LoadSounds("Sounds/");
+        MidiSound.Play("Sounds/Music1.mid");
     }
 
     public static void UpdataGame(float Delta)
     {
         Mouse.GetState();
+        if(GameFunc.PlayerShip.Life<=0) 
+            return;
 
         Counter += 1;
+        if (Counter % 16000 == 0)
+            MidiSound.RePlay();
         if (Counter % 4 == 0)
         {
             if (PlayerShip.ImageName == "PlayerShip.png")
@@ -857,7 +852,6 @@ public class GameFunc
                     Tail.MaxSpeed = 0.5f;
                 Tail.Direction = -128 + PlayerShip.Direction;
             }
-
         }
 
         EngineFunc.SpriteEngine.Dead();
@@ -868,10 +862,7 @@ public class GameFunc
         MistLayer1.Camera.Y = EngineFunc.SpriteEngine.Camera.Y * 1.1f * Delta;
         MistLayer2.Camera.X = EngineFunc.SpriteEngine.Camera.X * 1.3f * Delta;
         MistLayer2.Camera.Y = EngineFunc.SpriteEngine.Camera.Y * 1.3f * Delta;
-
-
     }
-
 
     public static void CreateBonus(string BonusName, int PosX, int PosY)
     {
@@ -893,7 +884,10 @@ public class GameFunc
             Bonus.DoCenter = true;
             Bonus.CanCollision = true;
             Bonus.CollideRadius = 24;
-            Bonus.SetAnim(Bonus.ImageName, 0, Bonus.PatternCount, 0.25f, true, false, true);
+            if (BonusName == "Money.png")
+                Bonus.SetAnim(Bonus.ImageName, 0, Bonus.PatternCount, 0.25f, true, false, true);
+            else
+                Bonus.SetAnim(Bonus.ImageName, 0, Bonus.PatternCount, 0.5f, true, false, true);
         }
     }
 
@@ -921,7 +915,5 @@ public class GameFunc
             Spark.Direction = i * 2;
         }
     }
-
-
 
 }
