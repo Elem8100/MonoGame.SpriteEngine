@@ -31,10 +31,7 @@ public class Background : BackgroundSprite
             Background.Init(EngineFunc.ImageLib, "Layer" + i.ToString() + ".png", X, Y, i, 0, 0, W, H);
             Background.Speed = speed;
             Background.TileMode = TileMode.Horizontal;
-            Background.SetMapSize(10, 10);
-        }
-
+         }
     }
-
 
 }
