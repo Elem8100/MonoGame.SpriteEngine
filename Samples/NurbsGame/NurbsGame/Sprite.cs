@@ -100,7 +100,7 @@ public class ShotBall : PlayerSprite
             Collision();
         }
     }
-  
+
 
     public override void OnCollision(Sprite sprite)
     {
@@ -113,7 +113,7 @@ public class ShotBall : PlayerSprite
                 SpaceBall.Visible = false;
                 this.CanCollision = false;
                 this.MoveOut();
-                GameFunc.CreateSpark(SpaceBall.X,SpaceBall.Y,SpaceBall.ImageName.Substring(4,1));
+                GameFunc.CreateSpark(SpaceBall.X, SpaceBall.Y, SpaceBall.ImageName.Substring(4, 1));
             }
             else
             {
@@ -189,11 +189,11 @@ public class GameFunc
         {
             var Spark = new Spark(EngineFunc.SpriteEngine);
             Spark.SpriteSheetMode = SpriteSheetMode.NoneSingle;
-            Spark.Init(EngineFunc.ImageLib, "Spark" + Num + ".png", PosX + -Random.Next(0, 31),-20+ PosY + Random.Next(0, 31), 200);
-            Spark.BlendMode=MonoGame.SpriteEngine.BlendMode.AddtiveColor;
+            Spark.Init(EngineFunc.ImageLib, "Spark" + Num + ".png", PosX + -Random.Next(0, 31), -20 + PosY + Random.Next(0, 31), 200);
+            Spark.BlendMode = MonoGame.SpriteEngine.BlendMode.AddtiveColor;
             Spark.Acceleration = 0.02f;
             Spark.MinSpeed = 1.8f;
-            Spark.MaxSpeed =(float)-(0.4 + Random.Next(0, 3));
+            Spark.MaxSpeed = (float)-(0.4 + Random.Next(0, 3));
             Spark.Direction = i * 2;
         }
     }
@@ -227,16 +227,19 @@ public class GameFunc
         }
         NextBallInterval = 1.8f;
         var SpriteList = EngineFunc.SpriteEngine.SpriteList;
-        for (int i = 0; i < SpriteList.Count; i++)
+        
+
+        foreach (var Sprite in SpriteList)
         {
-            if ((SpriteList[i] is SpaceBall) && ((SpaceBall)SpriteList[i]).ID == GameBallCount - 1)
+            if ((Sprite is SpaceBall) && ((SpaceBall)Sprite).ID == GameBallCount - 1)
             {
-                if (((SpaceBall)SpriteList[i]).Distance >= NextBallInterval)
+                if (((SpaceBall)Sprite).Distance >= NextBallInterval)
                 {
                     NextBallReady = true;
                 }
             }
         }
+
         if (NextBallReady)
         {
             var SpaceBall = new SpaceBall(EngineFunc.SpriteEngine);
