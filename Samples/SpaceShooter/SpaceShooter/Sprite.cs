@@ -398,7 +398,7 @@ public class PlayerShip : PlayerSprite
 
     bool DoAccelerate;
     bool DoDeccelerate;
-    public float Life=16;
+    public float Life = 16;
     public PlayerBullet Bullet;
     bool Ready;
     int ReadyTime;
@@ -739,16 +739,14 @@ public class GameFunc
         string AllText = System.IO.File.ReadAllText("Map1.txt");
         string[] Section = AllText.Split('/');
         int Length = Section.Length;
-        int X = 0, Y = 0, Z = 0;
-        string ImageName = null;
-
+             
         for (int i = Length - 2; i > 0; i--)
         {
             var Str = Section[i].Split(',');
-            X = int.Parse(Regex.Replace(Str[0], @"\D", ""));
-            Y = int.Parse(Regex.Replace(Str[1], @"\D", ""));
-            Z = int.Parse(Regex.Replace(Str[2], @"\D", ""));
-            ImageName = Regex.Replace(Str[3], "ImageName=", "").Trim();
+            int X = int.Parse(Regex.Replace(Str[0], @"\D", ""));
+            int Y = int.Parse(Regex.Replace(Str[1], @"\D", ""));
+            int Z = int.Parse(Regex.Replace(Str[2], @"\D", ""));
+            string ImageName = Regex.Replace(Str[3], "ImageName=", "").Trim();
             if (ImageName.Substring(0, 4) == "Tile")
             {
                 var Tile = new Sprite(EngineFunc.SpriteEngine);
@@ -822,7 +820,7 @@ public class GameFunc
     public static void UpdataGame(float Delta)
     {
         Mouse.GetState();
-        if(GameFunc.PlayerShip.Life<=0) 
+        if (GameFunc.PlayerShip.Life <= 0)
             return;
 
         Counter += 1;
