@@ -118,15 +118,13 @@ public class MapObj : Sprite
         string AllText = File.ReadAllText("Map1.txt");
         string[] Section = AllText.Split('/');
         int Length = Section.Length;
-        int X = 0, Y = 0;
-        string ImageName = null;
-
+      
         for (int i = Length - 2; i > 0; i--)
         {
             var Str = Section[i].Split(',');
-            X = int.Parse(Regex.Replace(Str[0], @"\D", ""));
-            Y = int.Parse(Regex.Replace(Str[1], @"\D", ""));
-            ImageName = Regex.Replace(Str[2], "ImageName=", "").Trim();
+            int X = int.Parse(Regex.Replace(Str[0], @"\D", ""));
+            int Y = int.Parse(Regex.Replace(Str[1], @"\D", ""));
+            string ImageName = Regex.Replace(Str[2], "ImageName=", "").Trim();
 
             var MapObj = new MapObj(EngineFunc.SpriteEngine);
             MapObj.Init(EngineFunc.ImageLib, ImageName, X - 540, Y - 150, 0);
