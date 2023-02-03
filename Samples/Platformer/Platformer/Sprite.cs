@@ -51,7 +51,7 @@ public class Player : JumperSprite
         if (Keyboard.KeyDown(Input.Right) && State != State.Die)
         {
             State = State.WalkRight;
-            X += 3f*Delta;
+            X += 3f * Delta;
             switch (JumpState)
             {
                 case JumpState.jsNone: SetAnim("Walk.png", 0, 12, 0.4f, true, false, true); break;
@@ -63,7 +63,7 @@ public class Player : JumperSprite
         if (Keyboard.KeyDown(Input.Left) && State != State.Die)
         {
             State = State.WalkLeft;
-            X -= 3f*Delta;
+            X -= 3f * Delta;
             switch (JumpState)
             {
                 case JumpState.jsNone: SetAnim("Walk.png", 0, 12, 0.4f, true, true, true); break;
@@ -105,7 +105,7 @@ public class Player : JumperSprite
         if (Engine.Camera.X > (X - 345))
             Engine.Camera.X = X - 345;
 
-       
+
         Collision();
         Engine.Camera.X = X - 512;
     }
@@ -264,8 +264,8 @@ public class Player : JumperSprite
                     State = State.Die;
                     CanCollision = false;
                     DoJump = true;
-                    JumpHeight= 8;
-                    JumpSpeed=0.2f;
+                    JumpHeight = 8;
+                    JumpSpeed = 0.2f;
                     AnimPos = 0;
                     SetAnim("Dead.png", 0, 6, 0.1f, true, false, true);
                 }
@@ -295,7 +295,7 @@ public class GreenApple : JumperSprite
 {
     public GreenApple(Sprite Parent) : base(Parent)
     {
-       SpriteSheetMode =  SpriteSheetMode.NoneSingle;
+        SpriteSheetMode = SpriteSheetMode.NoneSingle;
     }
     public override void DoMove(float Delta)
     {
@@ -411,7 +411,7 @@ public class Background : BackgroundSprite
 {
     public Background(Sprite Parent) : base(Parent)
     {
-       SpriteSheetMode= SpriteSheetMode.NoneSingle;
+        SpriteSheetMode = SpriteSheetMode.NoneSingle;
         TileMode = TileMode.Horizontal;
     }
 
@@ -442,7 +442,7 @@ public class GameFunc
         {
             var Particle = new ParticleSprite(EngineFunc.SpriteEngine);
             Particle.Init(EngineFunc.ImageLib, "Star.png", PosX + Random.Next(0, 21), PosY + Random.Next(0, 21), 20, 13, 14);
-            Particle.SpriteSheetMode= SpriteSheetMode.NoneSingle;
+            Particle.SpriteSheetMode = SpriteSheetMode.NoneSingle;
             Particle.LifeTime = 150;
             Particle.Decay = 1;
             Particle.ScaleX = 1.2f;
@@ -459,15 +459,13 @@ public class GameFunc
     {
         public Spray(Sprite Parent) : base(Parent)
         {
-           SpriteSheetMode= SpriteSheetMode.NoneSingle;
+            SpriteSheetMode = SpriteSheetMode.NoneSingle;
         }
-        byte Alpha = 255;
         public override void DoMove(float Delta)
         {
             base.DoMove(Delta);
             Accelerate();
             UpdatePos(Delta);
-            SetColor(Alpha, Alpha, Alpha, Alpha);
             Alpha -= 3;
             if (Alpha < 10)
                 Dead();
@@ -511,20 +509,18 @@ public class GameFunc
         string AllText = System.IO.File.ReadAllText("Map1.txt");
         string[] Section = AllText.Split('/');
         int Length = Section.Length;
-        int X = 0, Y = 0;
-        string ImageName = null;
-
+        
         for (int i = Length - 2; i > 0; i--)
         {
             var Str = Section[i].Split(',');
-            X = int.Parse(Regex.Replace(Str[0], @"\D", ""));
-            Y = int.Parse(Regex.Replace(Str[1], @"\D", ""));
-            ImageName = Regex.Replace(Str[2], "ImageName=", "").Trim();
+            int X = int.Parse(Regex.Replace(Str[0], @"\D", ""));
+            int Y = int.Parse(Regex.Replace(Str[1], @"\D", ""));
+            string ImageName = Regex.Replace(Str[2], "ImageName=", "").Trim();
             //create Map tile
             if ((ImageName != "Enemy1.png") && (ImageName != "Enemy2.png") && (ImageName != "Enemy3.png"))
             {
                 var Tile = new Tile(EngineFunc.SpriteEngine);
-                Tile.Init(EngineFunc.ImageLib, ImageName, X - 540, Y-20, -10);
+                Tile.Init(EngineFunc.ImageLib, ImageName, X - 540, Y - 20, -10);
                 Tile.SetSize(Tile.ImageWidth, Tile.ImageHeight);
                 Tile.SetPattern(Tile.Width, Tile.Height);
                 if (ImageName == "Spring1.png")
