@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 namespace MonoGame.SpriteEngine;
 
@@ -198,7 +200,7 @@ public class FootholdTree
         footholds.Add(F);
 
     }
-    public static void CreateFootholds()
+    public static void CreateFootholds(string FileName)
     {
         if (Instance == null)
         {
@@ -212,6 +214,30 @@ public class FootholdTree
             MinX1.Clear();
             MaxX2.Clear();
         }
+
+        string AllText = System.IO.File.ReadAllText(FileName);
+        string[] Section = AllText.Split('/');
+        int Length = Section.Length;
+        Foothold FH;
+        for (int i = 0; i < Length - 1; i++)
+        {
+            var Str = Section[i].Split(',');
+            int X1 = -int.Parse(Regex.Replace(Str[0], @"\D", ""));
+            int Y1 = int.Parse(Regex.Replace(Str[1], @"\D", ""));
+            int X2 = -int.Parse(Regex.Replace(Str[2], @"\D", ""));
+            int Y2 = int.Parse(Regex.Replace(Str[3], @"\D", ""));
+            int Prev = int.Parse(Regex.Replace(Str[4], @"\D", ""));
+            int Next = int.Parse(Regex.Replace(Str[5], @"\D", ""));
+            int ID = int.Parse(Regex.Replace(Str[6], @"\D", ""));
+            FH = new Foothold(new Vector2(X1, Y1), new Vector2(X2, Y2), 0);
+            FH.PrevID = Prev;
+            FH.NextID = Next;
+            FH.ID = ID;
+            Instance.Insert(FH);
+            MinX1.Add(X1);
+            MaxX2.Add(X2);
+        }
+
         /*
          int X1=0,Y1=0,X2=0,Y2=0;
          foothold FH;
