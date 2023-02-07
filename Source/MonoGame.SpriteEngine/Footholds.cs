@@ -20,10 +20,10 @@ public class Foothold
     public int Z;
     public int NextID;
     public int PrevID;
-    public int X1 { get; }
-    public int X2 { get; }
-    public int Y1 { get; }
-    public int Y2 { get; }
+    public float X1 { get => (int)p1.X; }
+    public float X2 { get => (int)p2.X; }
+    public float Y1 { get => (int)p1.Y; }
+    public float Y2 { get => (int)p2.Y; }
     public bool IsWall()
     {
         if (p1.X == p2.X)
@@ -67,12 +67,11 @@ public class FootholdTree
         return Result;
     }
 
-    public Vector2? FindBelow(Vector2 Pos, ref Foothold FH)
+    public Vector2 FindBelow(Vector2 Pos, ref Foothold FH)
     {
         bool First = true;
         double MaxY = 0, CMax = 0;
-        Vector2? Result = null;
-        Vector2 NewPos = new(0, 0);
+        Vector2 Result = new Vector2(0, 0);
         int X = (int)Pos.X;
         int Y = (int)Pos.Y;
 
@@ -80,11 +79,12 @@ public class FootholdTree
         {
             if (((X >= F.X1) && (X <= F.X2)) || ((X >= F.X2) && (X <= F.X1)))
             {
+
                 if (First)
                 {
                     if (F.X1 == F.X2)
                         continue;
-                    MaxY = (F.Y1 - F.Y2) / (F.X1 - F.X2) * (X - F.X1) + F.Y1;
+                    MaxY = (F.Y1 - F.Y2) / (F.X1-F.X2)* (X-F.X1) + F.Y1;
                     FH = F;
                     if (MaxY >= Y)
                         First = false;
@@ -105,13 +105,13 @@ public class FootholdTree
 
         if (!First)
         {
-            NewPos.X = X;
-            NewPos.Y = (float)MaxY;
-            Result = NewPos;
+            Result.X = X;
+            Result.Y = (float)MaxY;
+
         }
         else
         {
-            Result = null;
+            Result = new Vector2(99999, 99999);
         }
         return Result;
     }
@@ -179,8 +179,6 @@ public class FootholdTree
         }
         return Result;
     }
-
-
     public bool ClosePlatform(Foothold FH)
     {
         int Count = 0;
@@ -194,7 +192,6 @@ public class FootholdTree
             Result = true;
         return Result;
     }
-
     public void Insert(Foothold F)
     {
         footholds.Add(F);
@@ -218,17 +215,18 @@ public class FootholdTree
         string AllText = System.IO.File.ReadAllText(FileName);
         string[] Section = AllText.Split('/');
         int Length = Section.Length;
-        Foothold FH;
+        Foothold FH = null;
+
         for (int i = 0; i < Length - 1; i++)
         {
             var Str = Section[i].Split(',');
-            int X1 = -int.Parse(Regex.Replace(Str[0], @"\D", ""));
-            int Y1 = int.Parse(Regex.Replace(Str[1], @"\D", ""));
-            int X2 = -int.Parse(Regex.Replace(Str[2], @"\D", ""));
-            int Y2 = int.Parse(Regex.Replace(Str[3], @"\D", ""));
-            int Prev = int.Parse(Regex.Replace(Str[4], @"\D", ""));
-            int Next = int.Parse(Regex.Replace(Str[5], @"\D", ""));
-            int ID = int.Parse(Regex.Replace(Str[6], @"\D", ""));
+            int X1 = int.Parse(Regex.Replace(Str[0], "X1=", ""));
+            int Y1 = int.Parse(Regex.Replace(Str[1], "Y1=", ""));
+            int X2 = int.Parse(Regex.Replace(Str[2], "X2=", ""));
+            int Y2 = int.Parse(Regex.Replace(Str[3], "Y2=", ""));
+            int Prev = int.Parse(Regex.Replace(Str[4], "Prev=", ""));
+            int Next = int.Parse(Regex.Replace(Str[5], "Next=", ""));
+            int ID = int.Parse(Regex.Replace(Str[6], "ID=", ""));
             FH = new Foothold(new Vector2(X1, Y1), new Vector2(X2, Y2), 0);
             FH.PrevID = Prev;
             FH.NextID = Next;
