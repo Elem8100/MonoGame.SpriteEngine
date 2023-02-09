@@ -127,7 +127,6 @@ public class GameCanvas
         DrawEx(Texture, X, Y, 0, 0, 1, 1, 0, FlipX, FlipY, 255, 255, 255, 255, false, BlendMode);
     }
 
-
     public void DrawColor(Texture2D Texture, float X, float Y, byte Red, byte Green, byte Blue, byte Alpha = 255, BlendMode BlendMode = BlendMode.Normal)
     {
         DrawEx(Texture, X, Y, 0, 0, 1, 1, 0, false, false, Red, Green, Blue, Alpha, false, BlendMode);
@@ -219,13 +218,15 @@ public class GameCanvas
             OriginX = PatternWidth / 2;
             OriginY = PatternHeight / 2;
         }
+
         SetBlendMode(BlendMode);
         SpriteBatch.Draw(Texture,
-                        new Rectangle((int)X, (int)Y, (int)(PatternWidth * ScaleX), (int)(PatternHeight * ScaleY)),
+                        new Vector2(X, Y),
                         new Rectangle(X1, Y1, PatternWidth, PatternHeight),
                         new Microsoft.Xna.Framework.Color(Red, Green, Blue, Alpha),
                         Rotation,
                         new Vector2(OriginX, OriginY),
+                        new Vector2(ScaleX, ScaleY),
                         Flip,
                         0);
 
@@ -242,15 +243,18 @@ public class GameCanvas
             OriginX = CropArea.Width / 2;
             OriginY = CropArea.Height / 2;
         }
+
+
         SetBlendMode(BlendMode);
         SpriteBatch.Draw(Texture,
-                        new Rectangle((int)X, (int)Y, (int)(CropArea.Width * ScaleX), (int)(CropArea.Height * ScaleY)),
-                        CropArea,
-                        new Microsoft.Xna.Framework.Color(Red, Green, Blue, Alpha),
-                        Rotation,
-                        new Vector2(OriginX, OriginY),
-                        Flip,
-                        0);
+                         new Vector2(X, Y),
+                         CropArea,
+                         new Microsoft.Xna.Framework.Color(Red, Green, Blue, Alpha),
+                         Rotation,
+                         new Vector2(OriginX, OriginY),
+                         new Vector2(ScaleX, ScaleY),
+                         Flip,
+                         0);
 
         SpriteBatch.End();
     }

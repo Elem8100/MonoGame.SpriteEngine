@@ -298,7 +298,6 @@ public class Sprite
         Height = 100;
         Moved = true;
         Visible = true;
-        TruncMove = true;
     }
     public Sprite(Sprite Parent, Dictionary<string, Microsoft.Xna.Framework.Graphics.Texture2D> ImageLib,
                   string ImageName, float X, float Y, int Z = 0, int Width = 100, int Height = 100)
@@ -324,7 +323,7 @@ public class Sprite
         this.Height = Height;
         Moved = true;
         Visible = true;
-        TruncMove = true;
+
     }
     public void Init(Dictionary<string, Microsoft.Xna.Framework.Graphics.Texture2D> ImageLib,
                        string ImageName, float X, float Y, int Z = 0, int Width = 100, int Height = 100)
@@ -375,7 +374,7 @@ public class Sprite
 
     int imageIndex;
     public bool Moved { get; set; }
-    public bool TruncMove { get; set; }
+    public bool IntMove { get; set; }
     public Vector2 CollidePos;
     public int CollideRadius;
     public Rect CollideRect;
@@ -780,11 +779,11 @@ public class SpriteEx : Sprite
     }
     public void TowardToAngle(int Direction256, float Speed, bool DoLookAt, float Delta)
     {
-       // if (DoLookAt)
-         //   Angle = Direction256 / -PIConv256;
+        // if (DoLookAt)
+        //   Angle = Direction256 / -PIConv256;
         X += (float)(Sin256(Direction256) * Speed * Delta);
         Y -= (float)(Cos256(Direction256) * Speed * Delta);
-      
+
     }
     bool SameValue(float A, float B, float Epsilon)
     {
@@ -1026,8 +1025,8 @@ public class SpriteEx : Sprite
         {
             case SpriteSheetMode.NoneSingle:
                 Engine.Canvas.DrawEx(ImageLib[ImageName],
-                                     X + Camera.X + Offset.X - Engine.Camera.X,
-                                     Y + Camera.Y + Offset.Y - Engine.Camera.Y,
+                                     IntMove ? (int)X + Camera.X + Offset.X - (int)Engine.Camera.X : X + Camera.X + Offset.X - Engine.Camera.X,
+                                     IntMove ? (int)Y + Camera.Y + Offset.Y - (int)Engine.Camera.Y : Y + Camera.Y + Offset.Y - Engine.Camera.Y,
                                      OriginX, OriginY,
                                      ScaleX, ScaleY,
                                      Angle,
@@ -1040,8 +1039,8 @@ public class SpriteEx : Sprite
             case SpriteSheetMode.FixedSize:
 
                 Engine.Canvas.DrawPattern(ImageLib[ImageName],
-                                          X + Camera.X + Offset.X - Engine.Camera.X,
-                                          Y + Camera.Y + Offset.Y - Engine.Camera.Y,
+                                          IntMove ? (int)X + Camera.X + Offset.X - (int)Engine.Camera.X : X + Camera.X + Offset.X - Engine.Camera.X,
+                                          IntMove ? (int)Y + Camera.Y + Offset.Y - (int)Engine.Camera.Y : Y + Camera.Y + Offset.Y - Engine.Camera.Y,
                                           PatternIndex,
                                           PatternWidth, PatternHeight,
                                           OriginX, OriginY,
@@ -1057,8 +1056,8 @@ public class SpriteEx : Sprite
             //
             case SpriteSheetMode.VariableSize:
                 Engine.Canvas.DrawCropArea(ImageLib[ImageName],
-                                           X + Camera.X + Offset.X - Engine.Camera.X,
-                                           Y + Camera.Y + Offset.Y - Engine.Camera.Y,
+                                           IntMove ? (int)X + Camera.X + Offset.X - (int)Engine.Camera.X : X + Camera.X + Offset.X - Engine.Camera.X,
+                                           IntMove ? (int)Y + Camera.Y + Offset.Y - (int)Engine.Camera.Y : Y + Camera.Y + Offset.Y - Engine.Camera.Y,
                                            CropRect,
                                            OriginX, OriginY,
                                            ScaleX, ScaleY,
@@ -1122,7 +1121,7 @@ public class AnimatedSprite : SpriteEx
         PatternHeight = 64;
         Width = 64;
         Height = 64;
-        
+
     }
 
     public AnimatedSprite(Sprite Parent, Dictionary<string, Microsoft.Xna.Framework.Graphics.Texture2D> ImageLib,
