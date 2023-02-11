@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiled", "Tiled\Tiled.csproj", "{DCE08876-F09C-423D-9B67-91FF2F566342}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCE08876-F09C-423D-9B67-91FF2F566342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCE08876-F09C-423D-9B67-91FF2F566342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCE08876-F09C-423D-9B67-91FF2F566342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCE08876-F09C-423D-9B67-91FF2F566342}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E860436-A117-4E20-B398-DAAAC1397F42}
+	EndGlobalSection
+EndGlobal
