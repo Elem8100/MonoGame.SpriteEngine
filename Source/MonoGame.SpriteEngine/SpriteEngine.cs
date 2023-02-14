@@ -755,7 +755,8 @@ public class SpriteEx : Sprite
         return (int)(Math.Atan2(X, Y) * PIConv256) + 128;
     }
     public int GetAngle256(int SrcX, int SrcY, int DestX, int DestY)
-    { /*
+    {
+        /*
         if (SrcX == DestX)
         {
             return 128;
@@ -763,7 +764,8 @@ public class SpriteEx : Sprite
                 return 0;
         }
         */
-        return (int)(Math.Atan2(DestX - SrcX, DestY - SrcY) * PIConv256) + 128;
+   
+        return (int)Math.Round(Math.Atan2(DestX - SrcX, DestY - SrcY) * PIConv256) +128;
     }
     public double Cos256(int i)
     {

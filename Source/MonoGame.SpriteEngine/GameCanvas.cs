@@ -200,18 +200,18 @@ public class GameCanvas
       byte Red, byte Green, byte Blue, byte Alpha, bool DoCenter, BlendMode BlendMode = BlendMode.Normal)
     {
 
-        var TexWidth = Texture.Width;
-        var TexHeight = Texture.Height;
+        int TexWidth = Texture.Width;
+        int TexHeight = Texture.Height;
 
-        var ColCount = TexWidth / PatternWidth;
-        var RowCount = TexHeight / PatternHeight;
-        var FPatternIndex = PatternIndex;
+        int ColCount = TexWidth / PatternWidth;
+        int RowCount = TexHeight / PatternHeight;
+        int FPatternIndex = PatternIndex;
         if (FPatternIndex < 0)
             FPatternIndex = 0;
         if (FPatternIndex >= RowCount * ColCount)
             FPatternIndex = RowCount * ColCount - 1;
-        var X1 = (FPatternIndex % ColCount) * PatternWidth;
-        var Y1 = (FPatternIndex / ColCount) * PatternHeight;
+        int X1 = (FPatternIndex % ColCount) * PatternWidth;
+        int Y1 = (FPatternIndex / ColCount) * PatternHeight;
         SpriteEffects Flip = SetFlip(FlipX, FlipY);
         if (DoCenter)
         {
