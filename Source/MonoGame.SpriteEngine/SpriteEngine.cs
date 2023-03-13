@@ -1839,7 +1839,7 @@ public class BackgroundSprite : AnimatedSprite
     public bool Tiled;
     private int MapW, MapH;
     private int mapWidth, mapHeight;
-
+    public bool MoveByEngine;
     public int MapWidth
     {
         get => mapWidth;
@@ -1891,26 +1891,38 @@ public class BackgroundSprite : AnimatedSprite
         int dWidth = (Engine.VisibleWidth + ChipWidth) / ChipWidth + 1;
         int dHeight = (Engine.VisibleHeight + ChipHeight) / ChipHeight + 1;
 
-        int _x = (int)(-Engine.Camera.X - X);
-        int _y = (int)(-Engine.Camera.Y - Y);
-        int OfsX = _x % ChipWidth;
-        int OfsY = _y % ChipHeight;
-        int StartX = _x / ChipWidth;
+        float _x;
+        float _y;
+        if (MoveByEngine)
+        {
+            _x = (-Engine.Camera.X - X);
+            _y = (-Engine.Camera.Y - Y);
+        }
+        else
+        {
+            _x = -X;
+            _y = -Y;
+        }
+
+        float OfsX = _x % ChipWidth;
+        float OfsY = _y % ChipHeight;
+        int StartX = (int)_x / ChipWidth;
         int StartX_ = 0;
         if (StartX < 0)
         {
             StartX_ = -StartX;
             StartX = 0;
         }
-        int StartY = _y / ChipHeight;
+        int StartY = (int)_y / ChipHeight;
         int StartY_ = 0;
         if (StartY < 0)
         {
             StartY_ = -StartY;
             StartY = 0;
         }
-        int EndX = Math.Min(StartX + mapWidth - StartX_, dWidth);
-        int EndY = Math.Min(StartY + mapHeight - StartY_, dHeight);
+
+        int EndX = Math.Min(StartX + 1 - StartX_, dWidth);
+        int EndY = Math.Min(StartY + 1 - StartY_, dHeight);
 
         switch (TileMode)
         {
